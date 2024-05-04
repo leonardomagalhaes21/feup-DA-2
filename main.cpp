@@ -2,7 +2,7 @@
 #include "Classes/Data.h"
 
 int main() {
-    Data d = Data("real");
+    Data d = Data("toy");
     std::cout << "Done" ;
     return 0;
 }
