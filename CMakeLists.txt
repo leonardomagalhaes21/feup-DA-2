@@ -6,4 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(proj2 main.cpp
         Classes/Data.h
         Classes/Graph.h
-        Classes/Data.cpp)
+        Classes/Data.cpp
+        Classes/Menu.cpp
+        Classes/TspManager.h
+        Classes/TspManager.cpp)
