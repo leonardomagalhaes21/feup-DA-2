@@ -22,6 +22,10 @@ public:
    // void readToyGraphsTourismVertex(const std::string &filename);
     void readToyGraphsEdges(const std::string &basicString);
 
+    const std::unordered_map<int, std::pair<float, float>> getNodesLoc() const;
+
+    const std::unordered_map<int, std::string> getLabels() const;
+
 private:
     Graph<std::string> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;

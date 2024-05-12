@@ -1,8 +1,11 @@
 #include <iostream>
-#include "Classes/Data.h"
+#include "Classes/Menu.h"
 
 int main() {
-    Data d = Data("toy");
-    std::cout << "Done" ;
+    std::cout << "Loading ..." << std::endl;
+    Menu m = Menu();
+    m.showMenu();
+    std::cout << std::endl;
+    std::cout << "Done!" << std::endl;
     return 0;
 }
