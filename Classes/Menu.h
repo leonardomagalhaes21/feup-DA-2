@@ -8,6 +8,7 @@
 
 #include "Data.h"
 #include "TspManager.h"
+#include "Graph.h"
 
 class Menu {
 public:
@@ -36,7 +37,13 @@ public:
      */
     static void drawBottom();
 
+    template <class T>
+    double TSPbacktrack(Graph<T> *graph);
+
+
+
 };
+
 
 
 
