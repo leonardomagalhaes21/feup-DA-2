@@ -32,6 +32,7 @@ private:
     std::unordered_map<int, std::string> labels;
 
 
+    void readToyGraphsVertex(const string &basicString);
 };
 
 #endif //PROJECT_2_DATA_H

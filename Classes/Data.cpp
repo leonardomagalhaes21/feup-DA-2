@@ -108,7 +108,7 @@ void Data::readToyGraphs(const std::string &filename) {
 }
 
 void Data::readToyGraphsTourism(const std::string &filename) {
-    readRealWorldGraphsVertex(filename);
+    readToyGraphsVertex(filename);
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -318,4 +318,38 @@ const unordered_map<int, std::pair<float, float>> Data::getNodesLoc() const{
 const unordered_map<int, std::string> Data::getLabels() const {
     return labels;
 }
+
+void Data::readToyGraphsVertex(const string &filename) {
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        cerr << "There was an error opening file " << filename << endl;
+        return;
+    }
+
+    string line;
+    getline(file, line);
+    while (getline(file, line)) {
+        stringstream linestream(line);
+        string temp;
+        int id;
+        int value;
+        float value2;
+
+        getline(linestream, temp, ',');
+        id = stoi(temp);
+        getline(linestream, temp, ',');
+        value = stof(temp);
+        getline(linestream, temp, ',');
+        value2 = stof(temp);
+
+       // nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
+        cout << id << endl;
+        cout << value << endl;
+        graph.addVertex(to_string(id));
+        graph.addVertex(to_string(value));
+    }
+
+}
+
 

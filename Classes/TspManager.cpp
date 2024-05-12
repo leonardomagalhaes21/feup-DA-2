@@ -35,11 +35,11 @@ void TspManager::TSPbacktrackingMethod(vector<int>& bestTour) {
     vector<int> tour = {startNode};
     vector<bool> visited(graph.getNumVertex(), false);
     visited[startNode] = true;
-    TSPRec(graph,tour,visited,0.0, minTourCost,bestTour);
+    TSPRec(tour,visited,0.0, minTourCost,bestTour);
 
 }
 
-void TspManager::TSPRec(graph,vector<int> tour, vector<bool> visited, double currentCost, double minCost, vector<int> &bestTour) {
+void TspManager::TSPRec(vector<int> tour, vector<bool> visited, double currentCost, double minCost, vector<int> &bestTour) {
     if (tour.size() == graph.getNumVertex()) {
         minCost = min(minCost,currentCost);
         if (currentCost == minCost) {
@@ -50,10 +50,10 @@ void TspManager::TSPRec(graph,vector<int> tour, vector<bool> visited, double cur
         for (int i = 0; i < graph.getNumVertex(); ++i) {
             if (!visited[i]){
                int lastNode = tour.back();//tour[tour.size()-1];
-               if(hasEdge(graph.findVertex(lastNode),graph.findVertex(i))){
+               if(hasEdge(graph.findVertex(std::to_string(lastNode)),graph.findVertex(std::to_string(i)))){
                    visited[i] = true;
                    tour.push_back(i);
-                   TSPRec(graph,tour,visited,currentCost + getEdgeWeight(graph,lastNode,i),minCost,bestTour);
+                   TSPRec(tour,visited,currentCost + getEdgeWeight(graph,lastNode,i),minCost,bestTour);
                    visited[i] = false;
                    tour.pop_back();
                }
@@ -61,6 +61,25 @@ void TspManager::TSPRec(graph,vector<int> tour, vector<bool> visited, double cur
         }
     }
 
+}
+
+bool TspManager::hasEdge(Vertex<string> *pVertex, Vertex<string> *pVertex1) {
+for (auto edge : pVertex->getAdj()) {
+        if (edge->getDest() == pVertex1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+double TspManager::getEdgeWeight(Graph<std::string> graph, int node, int i) {
+    for (auto edge : graph.findVertex(std::to_string(node))->getAdj()) {
+        if (edge->getDest()->getInfo() == std::to_string(i)) {
+            return edge->getWeight();
+        }
+    }
+    return 0;
 }
 
 //void TspManager::TSPRec(int currentIndex, int currentDist, int *currentTour, int *Tour, bool *visited, double minTourCost) {

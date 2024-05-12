@@ -29,6 +29,10 @@ private:
     void TSPbacktrackingMethod(vector<int> &bestTour);
 
     void TSPRec(vector<int> vector1, vector<bool> vector2, double d, double cost, vector<int> &vector3);
+
+    bool hasEdge(Vertex<string> *pVertex, Vertex<string> *pVertex1);
+
+    double getEdgeWeight(Graph<std::string> graph, int node, int i);
 };
 
 
