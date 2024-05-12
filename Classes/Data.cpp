@@ -19,73 +19,76 @@ Data::Data(const std::string &s) {
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_50.csv");
     } else if (s == "real1") {
         readRealWorldGraphsVertex("../dataset/Real-world Graphs/graph1/edges.csv");
+//        readNodesOhioRizzGyatt("../dataset/Real-world Graphs/graph1/nodes.csv");
         readRealWorldGraphsEdges("../dataset/Real-world Graphs/graph1/edges.csv");
-        readNodesOhioRizzGyatt("../dataset/Real-world Graphs/graph1/nodes.csv");
+
     }
     else if (s == "real2") {
         readRealWorldGraphsVertex("../dataset/Real-world Graphs/graph2/edges.csv");
+//        readNodesOhioRizzGyatt("../dataset/Real-world Graphs/graph2/nodes.csv");
         readRealWorldGraphsEdges("../dataset/Real-world Graphs/graph2/edges.csv");
-        readNodesOhioRizzGyatt("../dataset/Real-world Graphs/graph2/nodes.csv");
+
     }
     else if (s == "real3") {
         readRealWorldGraphsVertex("../dataset/Real-world Graphs/graph3/edges.csv");
+//        readNodesOhioRizzGyatt("../dataset/Real-world Graphs/graph3/nodes.csv");
         readRealWorldGraphsEdges("../dataset/Real-world Graphs/graph3/edges.csv");
-        readNodesOhioRizzGyatt("../dataset/Real-world Graphs/graph3/nodes.csv");
+
     }
     else if (s == "25"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_25.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_25.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_25.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "50"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_50.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_50.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_50.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "100"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_100.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_100.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_100.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "200"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_200.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_200.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_200.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "300"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_300.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_300.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_300.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "400"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_400.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_400.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_400.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "500"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_500.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_500.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_500.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "600"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_600.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_600.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_600.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "700"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_700.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_700.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_700.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "800"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_800.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_800.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_800.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
     else if (s == "900"){
         readRealWorldGraphsVertex("../dataset/Extra_Fully_Connected_Graphs/edges_900.csv");
         readExtraGraphsEdges("../dataset/Extra_Fully_Connected_Graphs/edges_900.csv");
-        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes_900.csv");
+        readNodesOhioRizzGyatt("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
 }
 
@@ -135,6 +138,7 @@ void Data::readToyGraphsTourism(const std::string &filename) {
 
     }
 }
+
 
 //void Data::readToyGraphsTourismVertex(const string &filename) {
 //
@@ -195,6 +199,7 @@ void Data::readExtraGraphsEdges(const std::string &filename) {
         graph.addEdge(vertex2, vertex1,distance);
     }
 }
+
 void Data::readRealWorldGraphsVertex(const std::string &filename) {
     ifstream file(filename);
 
@@ -208,9 +213,21 @@ void Data::readRealWorldGraphsVertex(const std::string &filename) {
     while (getline(file, line)) {
         stringstream linestream(line);
         string temp;
+        int id;
+        float value;
+        float value2;
+
         getline(linestream, temp, ',');
-        graph.addVertex(temp);
+        id = stoi(temp);
+        getline(linestream, temp, ',');
+        value = stof(temp);
+        getline(linestream, temp, ',');
+        value2 = stof(temp);
+
+        nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
+        graph.addVertex(to_string(id));
     }
+
 }
 void Data::readRealWorldGraphsEdges(const std::string &filename) {
     ifstream file(filename);
@@ -263,6 +280,7 @@ void Data::readNodesOhioRizzGyatt(const string &filename) {
         value2 = stof(temp);
 
         nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
+       // graph.addVertex(to_string(id));
     }
 
 }

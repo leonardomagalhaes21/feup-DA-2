@@ -209,7 +209,7 @@ void Menu::showMenu() {
 
         while (flag) {
             drawTop();
-            cout << "| 1. Basic Service Metrics                         |" << endl;
+            cout << "| 1. Backtracking Algorithm                        |" << endl;
             cout << "| 2. Reliability and Sensitivity to Failures       |" << endl;
             cout << "| 3. Reset Water Supply System                     |" << endl;
             cout << "| 4. Print Network Details                         |" << endl;
@@ -219,6 +219,9 @@ void Menu::showMenu() {
             cin >> key;
             switch (key) {
                 case '1': {
+                    tspm.TSPbacktracking();
+
+/*
                     char key1;
                     drawTop();
                     cout << "| 1. Maximum amount of water that reaches each city|" << endl;
@@ -245,6 +248,7 @@ void Menu::showMenu() {
                         }
                     };
                     break;
+*/
 
                 }
                 case '2': {

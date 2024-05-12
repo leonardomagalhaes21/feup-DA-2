@@ -17,10 +17,18 @@ public :
     TspManager(const Data &d);
 
 
+    void TSPbacktracking();
+
 private:
     Graph<std::string> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
     std::unordered_map<int, std::string> labels;
+
+
+
+    void TSPbacktrackingMethod(vector<int> &bestTour);
+
+    void TSPRec(vector<int> vector1, vector<bool> vector2, double d, double cost, vector<int> &vector3);
 };
 
 
