@@ -82,6 +82,51 @@ double TspManager::getEdgeWeight(Graph<std::string> graph, int node, int i) {
     return 0;
 }
 
+void TspManager::TSPtriangularHeuristic() {
+    if(!graph.getVertexSet().empty()){
+        vector<int> bestTour;
+        TSPtriangularHeuristicMethod(bestTour);
+        cout << "Best tour: ";
+        for (int i = 0; i < bestTour.size(); i++) {
+            cout << bestTour[i] << " ";
+        }
+        cout << endl;
+    } else {
+        cout << "Graph is empty" << endl;
+    }
+}
+
+void TspManager::TSPtriangularHeuristicMethod(std::vector<int> &vector1) {
+    vector<int> tour;
+    vector<bool> visited(graph.getNumVertex(), false);
+    int startNode = 0;
+    tour.push_back(startNode);
+    visited[startNode] = true;
+    int nextNode = 0;
+    while (tour.size() < graph.getNumVertex()) {
+        double minDist = INT_MAX;
+        for (int i = 0; i < graph.getNumVertex(); i++) {
+            if (!visited[i]) {
+                auto nextNodev = graph.findVertex(to_string(i));
+                auto iv = graph.findVertex(to_string(nextNode));
+                double dist;
+                dist = graph.getEdgeWeight(nextNodev->getInfo(), iv->getInfo());
+                if (dist < minDist) {
+                    minDist = dist;
+                    nextNode = i;
+                }
+            }
+        }
+        tour.push_back(nextNode);
+        visited[nextNode] = true;
+    }
+    vector1 = tour;
+}
+
+
+
+
+
 //void TspManager::TSPRec(int currentIndex, int currentDist, int *currentTour, int *Tour, bool *visited, double minTourCost) {
 ////    if (currentIndex == graph.getNumVertex()) {
 ////            currentDist += graph.getEdgeWeight(currentTour[currentIndex - 1], currentTour[0]);

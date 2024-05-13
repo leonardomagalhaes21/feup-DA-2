@@ -185,6 +185,20 @@ public:
     double TSP_Backtracking() const;
 
 
+    double getEdgeWeight(const T &source, const T &destination) const{
+        Vertex<T> *v = findVertex(source);
+        if (v == nullptr) {
+            return std::numeric_limits<double>::max();
+        }
+        for (auto e : v->getAdj()) {
+            if (e->getDest()->getInfo() == destination) {
+                return e->getWeight();
+            }
+        }
+        return std::numeric_limits<double>::max();
+
+    }
+
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
 
@@ -198,8 +212,6 @@ protected:
 
     void TSP_BacktrackingUtil(std::vector<T> &shortestRoute, std::vector<T> &currentRoute, std::vector<bool> &visited,
                               double &shortestLength, double currentLength) const;
-
-    double getEdgeWeight(const T &source, const T &destination) const;
 
     void resetNodes();
 
