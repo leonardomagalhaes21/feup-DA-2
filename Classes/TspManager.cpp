@@ -29,6 +29,7 @@ void TspManager::TSPbacktracking() {
         cout << "Graph is empty" << endl;
     }
 }
+
 void TspManager::TSPbacktrackingMethod(vector<int>& bestTour) {
     double minTourCost = INT_MAX;
     int startNode = 0;
@@ -39,7 +40,7 @@ void TspManager::TSPbacktrackingMethod(vector<int>& bestTour) {
 
 }
 
-void TspManager::TSPRec(vector<int> tour, vector<bool> visited, double currentCost, double minCost, vector<int> &bestTour) {
+void TspManager::TSPRec(vector<int>& tour, vector<bool>& visited, double currentCost, double& minCost, vector<int>& bestTour) {
     if (tour.size() == graph.getNumVertex()) {
         minCost = min(minCost,currentCost);
         if (currentCost == minCost) {
@@ -64,7 +65,7 @@ void TspManager::TSPRec(vector<int> tour, vector<bool> visited, double currentCo
 }
 
 bool TspManager::hasEdge(Vertex<string> *pVertex, Vertex<string> *pVertex1) {
-for (auto edge : pVertex->getAdj()) {
+    for (auto edge : pVertex->getAdj()) {
         if (edge->getDest() == pVertex1) {
             return true;
         }

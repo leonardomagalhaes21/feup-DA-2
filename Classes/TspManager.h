@@ -30,7 +30,10 @@ private:
 
     void TSPbacktrackingMethod(std::vector<int> &bestTour);
 
-    void TSPRec(std::vector<int> vector1, std::vector<bool> vector2, double d, double cost, std::vector<int> &vector3);
+
+
+    void TSPRec(std::vector<int>& vector1, std::vector<bool>&  vector2, double d, double&  cost, std::vector<int> &vector3);
+
 
     bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
 
