@@ -19,6 +19,8 @@ public :
 
     void TSPbacktracking();
 
+    void TSPtriangularHeuristic();
+
 private:
     Graph<std::string> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
@@ -28,11 +30,16 @@ private:
 
     void TSPbacktrackingMethod(std::vector<int> &bestTour);
 
+
+
     void TSPRec(std::vector<int>& vector1, std::vector<bool>&  vector2, double d, double&  cost, std::vector<int> &vector3);
+
 
     bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
 
     double getEdgeWeight(Graph<std::string> graph, int node, int i);
+
+    void TSPtriangularHeuristicMethod(std::vector<int> &vector1);
 };
 
 
