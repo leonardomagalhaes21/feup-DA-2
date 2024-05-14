@@ -241,8 +241,9 @@ void Menu::showMenu() {
             drawTop();
             cout << "| 1. Backtracking Algorithm                        |" << endl;
             cout << "| 2. Triangular Heuristic Approximation            |" << endl;
-            cout << "| 3. Change Dataset                                |" << endl;
-            cout << "| 4. Print Network Details                         |" << endl;
+            cout << "| 3. Prim's Algorithm                              |" << endl;
+            cout << "| 4. Change Dataset                                |" << endl;
+            cout << "| 5. Print Network Details                         |" << endl;
             cout << "| Q. Exit                                          |" << endl;
             drawBottom();
             cout << "Choose an option: ";
@@ -256,13 +257,50 @@ void Menu::showMenu() {
                     tspm.TSPtriangularHeuristic();
                     break;
                 }
-                case '3': {
-                    mainMenu = true;
-                    subMenu = false;
+                case '3':{
+                    tspm.TSPprim();
                     break;
                 }
+              case '4': {
+                    tspm.printNetworkInfo(system);
+
+                    break;
+                }
+
+                case '5': {
+                    char key1;
+                    drawTop();
+                    cout << "| 1. Print Cities Details                          |" << endl;
+                    cout << "| 2. Print Reservoirs Details                      |" << endl;
+                    cout << "| 3. Print Pumping Stations Details                |" << endl;
+                    cout << "| Q. Exit                                          |" << endl;
+                    drawBottom();
+                    cout << "Choose an option: ";
+                    cin >> key1;
+                    switch (key1) {
+                        case '1': {
+                            // wsm.printCitiesDetails();
+                            break;
+                        }
+                        case '2': {
+                            // wsm.printReservoirsDetails();
+                            break;
+                        }
+                        case '3': {
+                            // wsm.printStationsDetails();
+                            break;
+                        }
+                        case 'Q' : {
+                            break;
+                        }
+                        default: {
+                            cout << endl << "Invalid option!" << endl;
+                        }
+                    };
+
                 case '4': {
                     tspm.printNetworkInfo(system);
+
                     break;
                 }
                 case 'Q' : {

@@ -114,7 +114,9 @@ void Data::readToyGraphsTourism(const std::string &filename) {
 }
 
 
+
 void Data::readExtraGraphs(const std::string &filename) {
+
     ifstream file(filename);
 
     if (!file.is_open()) {

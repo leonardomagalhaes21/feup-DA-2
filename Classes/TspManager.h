@@ -13,7 +13,12 @@ public :
     TspManager(const Data &d);
     void TSPbacktracking();
     void TSPtriangularHeuristic();
+
+    void TSPprim();
+
+
     void printNetworkInfo(const std::string& system);
+
 
 private:
     Graph<std::string> graph;
@@ -25,6 +30,15 @@ private:
     bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
     double getEdgeWeight(Graph<std::string> graph, int node, int i);
     void TSPtriangularHeuristicMethod(std::vector<int> &vector1);
+
+    void CompleteGraph(Graph<std::string> graphcopy);
+
+    float getLatitude(Vertex<std::string> *vertex) const;
+
+    float getLongitude(Vertex<std::string> *vertex) const;
+
+
+    double haversineDistance(double lat1, double lon1, double lat2, double lon2);
 };
 
 
