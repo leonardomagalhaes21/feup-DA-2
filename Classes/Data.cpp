@@ -1,6 +1,7 @@
 #include "Data.h"
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 
 Data::Data(const std::string &s) {
@@ -15,58 +16,45 @@ Data::Data(const std::string &s) {
         readGraphs("../dataset/Real-world Graphs/graph1/edges.csv");
         readNodes("../dataset/Real-world Graphs/graph1/nodes.csv");
 
-    }
-    else if (s == "real2") {
+    } else if (s == "real2") {
         readGraphs("../dataset/Real-world Graphs/graph2/edges.csv");
         readNodes("../dataset/Real-world Graphs/graph2/nodes.csv");
 
-    }
-    else if (s == "real3") {
+    } else if (s == "real3") {
         readGraphs("../dataset/Real-world Graphs/graph3/edges.csv");
         readNodes("../dataset/Real-world Graphs/graph3/nodes.csv");
 
-    }
-    else if (s == "25"){
+    } else if (s == "25") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_25.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "50"){
+    } else if (s == "50") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_50.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "100"){
+    } else if (s == "100") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_100.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "200"){
+    } else if (s == "200") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_200.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "300"){
+    } else if (s == "300") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_300.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "400"){
+    } else if (s == "400") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_400.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "500"){
+    } else if (s == "500") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_500.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "600"){
+    } else if (s == "600") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_600.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "700"){
+    } else if (s == "700") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_700.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "800"){
+    } else if (s == "800") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_800.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
-    }
-    else if (s == "900"){
+    } else if (s == "900") {
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_900.csv");
         readNodes("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
@@ -114,7 +102,6 @@ void Data::readToyGraphsTourism(const std::string &filename) {
 }
 
 
-
 void Data::readExtraGraphs(const std::string &filename) {
 
     ifstream file(filename);
@@ -138,8 +125,8 @@ void Data::readExtraGraphs(const std::string &filename) {
 
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
-        graph.addEdge(vertex1, vertex2,distance);
-        graph.addEdge(vertex2, vertex1,distance);
+        graph.addEdge(vertex1, vertex2, distance);
+        graph.addEdge(vertex2, vertex1, distance);
     }
 }
 
@@ -168,9 +155,9 @@ void Data::readGraphs(const std::string &filename) {
         distance = stof(temp);
 
         graph.addVertex(to_string(vertex1));
-        graph.addVertex(to_string( vertex2));
-        graph.addEdge(to_string(vertex1), to_string(vertex2),distance);
-        graph.addEdge(to_string(vertex2), to_string(vertex1),distance);
+        graph.addVertex(to_string(vertex2));
+        graph.addEdge(to_string(vertex1), to_string(vertex2), distance);
+        graph.addEdge(to_string(vertex2), to_string(vertex1), distance);
     }
 
 }
@@ -204,7 +191,7 @@ void Data::readNodes(const std::string &filename) {
 
 }
 
-const unordered_map<int, std::pair<float, float>> Data::getNodesLoc() const{
+const unordered_map<int, std::pair<float, float>> Data::getNodesLoc() const {
     return nodesloc;
 }
 
