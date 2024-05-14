@@ -257,11 +257,11 @@ void Menu::showMenu() {
                     tspm.TSPtriangularHeuristic();
                     break;
                 }
-                case '3':{
+                case '3': {
                     tspm.TSPprim();
                     break;
                 }
-              case '4': {
+                case '4': {
                     tspm.printNetworkInfo(system);
 
                     break;
@@ -298,21 +298,17 @@ void Menu::showMenu() {
                         }
                     };
 
-                case '4': {
-                    tspm.printNetworkInfo(system);
 
-                    break;
-                }
-                case 'Q' : {
-                    mainMenu = false;
-                    subMenu = false;
-                    break;
-                }
-                default: {
-                    cout << endl << "Invalid option!" << endl;
+                    case 'Q' : {
+                        mainMenu = false;
+                        subMenu = false;
+                        break;
+                    }
+                    default: {
+                        cout << endl << "Invalid option!" << endl;
+                    }
                 }
             }
-
             if (subMenu) {
                 cout << endl;
                 cout << "Would you like to do something else? (Y/N) \n";
