@@ -203,7 +203,36 @@ float TspManager::getLongitude(Vertex<std::string>* vertex) const {
 
 
 
+
+
+void TspManager::printNetworkInfo(const string& system){
+    if (system == "real1" || system == "real2" || system == "real3") {
+        for (auto node : nodesloc) {
+            cout << "Vertex: " << node.first << " X: " << node.second.first << " Y: " << node.second.second << endl;
+        }
+    }
+    else if (system == "tourism"){
+        for (const auto& label : labels) {
+            cout << "Vertex: " << label.first << " Label: " << label.second << endl;
+        }
+    }
+    else if (system == "stadiums" || system == "shipping") {
+        for (auto vertex : graph.getVertexSet()) {
+            cout << "Vertex: " << vertex->getInfo() << endl;
+        }
+    }
+    else {
+        for (auto vertex : graph.getVertexSet()) {
+            auto node = nodesloc.find(stoi(vertex->getInfo()));
+            if (node != nodesloc.end()) {
+                cout << "Vertex: " << vertex->getInfo() << " X: " << node->second.first << " Y: " << node->second.second << endl;
+            }
+        }
+    }
+}
+
 void TspManager::CompleteGraph(Graph<std::string> graphcopy) {
+
 
         std::vector<Vertex<std::string>*> vertices = graphcopy.getVertexSet();
 
@@ -212,7 +241,6 @@ void TspManager::CompleteGraph(Graph<std::string> graphcopy) {
             for (size_t j = i + 1; j < vertices.size(); ++j) {
                 Vertex<std::string>* v1 = vertices[i];
                 Vertex<std::string>* v2 = vertices[j];
-
                 // Compute Haversine distance between v1 and v2
                 double distance = haversineDistance(getLatitude(v1), getLongitude(v1), getLatitude(v2), getLongitude(v2));
 

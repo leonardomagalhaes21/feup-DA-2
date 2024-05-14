@@ -45,6 +45,7 @@ void Menu::showMenu() {
                 switch (key) {
                     case '1': {
                         system = "real1";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -53,6 +54,7 @@ void Menu::showMenu() {
                     }
                     case '2': {
                         system = "real2";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -61,6 +63,7 @@ void Menu::showMenu() {
                     }
                     case '3': {
                         system = "real3";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -81,6 +84,7 @@ void Menu::showMenu() {
                 switch (key) {
                     case '1': {
                         system = "shipping";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -89,6 +93,7 @@ void Menu::showMenu() {
                     }
                     case '2': {
                         system = "stadiums";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -97,6 +102,7 @@ void Menu::showMenu() {
                     }
                     case '3': {
                         system = "tourism";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -125,6 +131,7 @@ void Menu::showMenu() {
                 switch (key) {
                     case '1': {
                         system = "25";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -133,6 +140,7 @@ void Menu::showMenu() {
                     }
                     case '2': {
                         system = "50";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -141,6 +149,7 @@ void Menu::showMenu() {
                     }
                     case '3': {
                         system = "100";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -149,6 +158,7 @@ void Menu::showMenu() {
                     }
                     case '4': {
                         system = "200";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -157,6 +167,7 @@ void Menu::showMenu() {
                     }
                     case '5': {
                         system = "300";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -165,6 +176,7 @@ void Menu::showMenu() {
                     }
                     case '6': {
                         system = "400";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -173,6 +185,7 @@ void Menu::showMenu() {
                     }
                     case '7': {
                         system = "500";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -181,6 +194,7 @@ void Menu::showMenu() {
                     }
                     case '8': {
                         system = "600";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -189,6 +203,7 @@ void Menu::showMenu() {
                     }
                     case '9': {
                         system = "700";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -197,6 +212,7 @@ void Menu::showMenu() {
                     }
                     case 'A': {
                         system = "800";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -205,6 +221,7 @@ void Menu::showMenu() {
                     }
                     case 'B': {
                         system = "900";
+                        cout << "Loading data..." << endl;
                         Data d = Data(system);
                         tspm = TspManager(d);
                         mainMenu = false;
@@ -244,11 +261,12 @@ void Menu::showMenu() {
                     tspm.TSPprim();
                     break;
                 }
-                case '4': {
-                    mainMenu = true;
-                    subMenu = false;
+              case '4': {
+                    tspm.printNetworkInfo(system);
+
                     break;
                 }
+
                 case '5': {
                     char key1;
                     drawTop();
@@ -279,6 +297,10 @@ void Menu::showMenu() {
                             cout << endl << "Invalid option!" << endl;
                         }
                     };
+
+                case '4': {
+                    tspm.printNetworkInfo(system);
+
                     break;
                 }
                 case 'Q' : {

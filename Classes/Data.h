@@ -12,13 +12,20 @@ public:
     const std::unordered_map<int, std::pair<float, float>> &getNodes() const;
 
     const Graph<std::string> &getGraph() const;
-    void readExtraGraphsEdges(const std::string &filename);
-    void readRealWorldGraphsVertex(const std::string &filename);
-    void readRealWorldGraphsEdges(const std::string &filename);
-    void readNodesOhioRizzGyatt(const std::string &filename);
-    void readToyGraphs(const std::string &filename);
+
+//    // void readExtraGraphsEdges(const std::string &filename);
+//     //void readRealWorldGraphsVertex(const std::string &filename);
+//     //void readRealWorldGraphsEdges(const std::string &filename);
+//     //void readNodesOhioRizzGyatt(const std::string &filename);
+// //     void readToyGraphs(const std::string &filename);
+//     void readToyGraphsTourism(const std::string &filename);
+//     void readToyGraphsEdges(const std::string &basicString);
+
+    void readExtraGraphs(const std::string &filename);
+    void readGraphs(const std::string &filename);
+    void readNodes(const std::string &filename);
     void readToyGraphsTourism(const std::string &filename);
-    void readToyGraphsEdges(const std::string &basicString);
+
 
     const std::unordered_map<int, std::pair<float, float>> getNodesLoc() const;
 
@@ -30,7 +37,6 @@ private:
     std::unordered_map<int, std::string> labels;
 
 
-    void readToyGraphsVertex(const std::string &basicString);
 };
 
 #endif //PROJECT_2_DATA_H
