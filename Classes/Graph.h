@@ -9,6 +9,8 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <cmath>
+#include <stack>
 
 
 
@@ -99,56 +101,7 @@ protected:
 template <class T>
 class Graph {
 public:
-/*    double **dists; // Distance matrix
-    void savepath(int n, int currentPath[], int path[]) {
-        for (int i = 0; i < n; ++i) {
-            path[i] = currentPath[i];
-        }
-    }
-    double TSPRec(double currDist, double *minDist, int currentIndx, int n, int currentPath[], int path[]) {
-        if (currentIndx == n) {
-            currDist += dists[currentPath[currentIndx - 1]][currentPath[0]]; // Assuming dists is your distance matrix
-            if (currDist < *minDist) {
-                *minDist = currDist;
-                savepath(n, currentPath, path); // Implement this function to save the optimal path
-            }
-        } else {
-            for (int i = 0; i < n; i++) {
-                int node = i;
-                auto it = nodesMAP.find(std::to_string(node));
-                if (it != nodesMAP.end() && !(it->second->isVisited())) {
-                    if (currDist + dists[currentPath[currentIndx - 1]][node] < *minDist) {
-                        currentPath[currentIndx] = node;
-                        nodesMAP.find(std::to_string(node))->second->setVisited(true);
-                        TSPRec(currDist + dists[currentPath[currentIndx - 1]][node], minDist, currentIndx + 1, n, currentPath, path);
-                        nodesMAP.find(std::to_string(node))->second->setVisited(false);
-                    }
-                }
-            }
-        }
-        return *minDist;
-    }*/
 
-
-
-/*
-    bool addSegment(std::string _nodeA, std::string _nodeB, double _cost) {
-        auto v1 = nodesMAP.find(_nodeA);
-        auto v2 = nodesMAP.find(_nodeB);
-        if (v1 == nodesMAP.end() || v2 == nodesMAP.end()) return false;
-        Segment *s = new Segment(_nodeA, _nodeB, _cost);
-        v1->second.addOutgoing(s);
-        v2->second.addIncoming(s);
-        int indexA = std::stoi(_nodeA);
-        int indexB = std::stoi(_nodeB);
-        dists[indexA][indexB] = _cost;
-        dists[indexB][indexA] = _cost; // Assuming undirected graph
-        return true;
-    }
-*/
-
-
-/*    std::unordered_map<std::string, Vertex<T>*> nodesMAP; //store vertices by their info as a string*/
     ~Graph();
     /*
     * Auxiliary function to find a vertex with a given the content.
@@ -748,38 +701,10 @@ template <class T>
 Graph<T>::~Graph() {
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
-   /* deleteMatrix(dists, getNumVertex());*/
+
 }
 
 
-
-
-// Define TSPRec function
-/*
-template <class T>
-double Graph<T>::TSPRec(double currDist, double *minDist, int currentIndx, int n, int currentPath[], int path[]) {
-    if (currentIndx == n) {
-        currDist += dists[currentPath[currentIndx - 1]][currentPath[0]]; // Assuming dists is your distance matrix
-        if (currDist < *minDist) {
-            *minDist = currDist;
-            savepath(n, currentPath, path); // Implement this function to save the optimal path
-        }
-    } else {
-        for (int i = 0; i < n; i++) {
-            int node = i;
-            if (!(nodesMAP.find(std::to_string(node))->second.isVisited())) {
-                if (currDist + dists[currentPath[currentIndx - 1]][node] < *minDist) {
-                    currentPath[currentIndx] = node;
-                    nodesMAP.find(std::to_string(node))->second.setVisited(true);
-                    TSPRec(currDist + dists[currentPath[currentIndx - 1]][node], minDist, currentIndx + 1, n, currentPath, path);
-                    nodesMAP.find(std::to_string(node))->second.setVisited(false);
-                }
-            }
-        }
-    }
-    return *minDist;
-}
-*/
 
 
 #endif /* DA_TP_CLASSES_GRAPH */

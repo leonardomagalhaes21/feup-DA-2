@@ -136,42 +136,6 @@ void Data::readToyGraphsTourism(const std::string &filename) {
     }
 }
 
-
-//void Data::readToyGraphsTourismVertex(const string &filename) {
-//
-//    ifstream file(filename);
-//
-//    if (!file.is_open()) {
-//        cerr << "There was an error opening file " << filename << endl;
-//        return;
-//    }
-//
-//    string line;
-//    getline(file, line);
-//    while (getline(file, line)) {
-//        stringstream linestream(line);
-//        string temp;
-//        getline(linestream, temp, ',');
-//        graph.addVertex(temp);
-//    }
-//
-//}
-//void Data::readExtraGraphsVertex(const std::string &filename) {
-//    ifstream file(filename);
-//
-//    if (!file.is_open()) {
-//        cerr << "There was an error opening file " << filename << endl;
-//        return;
-//    }
-//
-//    string line;
-//    while (getline(file, line)) {
-//        stringstream linestream(line);
-//        string temp;
-//        getline(linestream, temp, ',');
-//        graph.addVertex(temp);
-//    }
-//}
 void Data::readExtraGraphsEdges(const std::string &filename) {
     ifstream file(filename);
 

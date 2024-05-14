@@ -1,5 +1,7 @@
 #include "TspManager.h"
 #include <iostream>
+#include <unordered_set>
+
 using namespace std;
 
 TspManager::TspManager() {
@@ -125,36 +127,119 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour) {
     }
     bestTour = tour;
 }
+template <class T>
+struct CompareEdgeWeights {
+    bool operator()(const Edge<T>* e1, const Edge<T>* e2) const {
+        return e1->getWeight() > e2->getWeight();
+    }
+};
+
+void TspManager::TSPprim() {
+    //CompleteGraph(graph);
+    if (graph.getNumVertex() == 0) return;
+    Vertex<std::string> *startVertex = graph.getVertexSet()[0];
+
+    std::unordered_set<Vertex<std::string> *> visitedVertices;
+    std::priority_queue<Edge<std::string> *, std::vector<Edge<std::string> *>, CompareEdgeWeights<std::string>> pq;
+    visitedVertices.insert(startVertex);
+    for (Edge<std::string> *edge: startVertex->getAdj()) {
+        pq.push(edge);
+    }
+    std::vector<Edge<std::string> *> shortestPathEdges;
+
+
+    while (!pq.empty() && visitedVertices.size() < graph.getNumVertex()) {
+        Edge<std::string> *minEdge = pq.top();
+        pq.pop();
+        Vertex<std::string> *destVertex = minEdge->getDest();
+        if (visitedVertices.find(destVertex) == visitedVertices.end()) {
+            visitedVertices.insert(destVertex);
+            shortestPathEdges.push_back(minEdge);
+            for (Edge<std::string> *edge: destVertex->getAdj()) {
+                pq.push(edge);
+            }
+        }
+    }
+    int totalWeight = 0;
+    for (Edge<std::string> *edge: shortestPathEdges) {
+        std::cout << edge->getOrig()->getInfo() << " -> " << edge->getDest()->getInfo() << " (Weight: "
+                  << edge->getWeight() << ")" << std::endl;
+        totalWeight += edge->getWeight();
+    }
+
+
+    if (!shortestPathEdges.empty()) {
+        Vertex<std::string> *lastVertex = shortestPathEdges.back()->getDest();
+        std::cout << lastVertex->getInfo() << " -> " << startVertex->getInfo() << " (Weight: "
+                  << graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo()) << ")" << std::endl;
+        totalWeight += graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo());
+    }
+
+    std::cout << "Total weight: " << totalWeight << std::endl;
+
+}
+float TspManager::getLatitude(Vertex<std::string>* vertex) const {
+    // Check if vertex exists in nodesloc map
+    auto it = nodesloc.find(std::stoi(vertex->getInfo()));
+    if (it != nodesloc.end()) {
+        // Return latitude of the vertex
+        return it->second.first;
+    }
+    // Return a default value (e.g., -1) if vertex not found
+    return -1.0f; // You can choose a suitable default value
+}
+
+// Function to get longitude of a vertex
+float TspManager::getLongitude(Vertex<std::string>* vertex) const {
+    // Check if vertex exists in nodesloc map
+    auto it = nodesloc.find(std::stoi(vertex->getInfo()));
+    if (it != nodesloc.end()) {
+        // Return longitude of the vertex
+        return it->second.second;
+    }
+    // Return a default value (e.g., -1) if vertex not found
+    return -1.0f; // You can choose a suitable default value
+}
 
 
 
+void TspManager::CompleteGraph(Graph<std::string> graphcopy) {
+
+        std::vector<Vertex<std::string>*> vertices = graphcopy.getVertexSet();
+
+        // Iterate over all pairs of vertices
+        for (size_t i = 0; i < vertices.size(); ++i) {
+            for (size_t j = i + 1; j < vertices.size(); ++j) {
+                Vertex<std::string>* v1 = vertices[i];
+                Vertex<std::string>* v2 = vertices[j];
+
+                // Compute Haversine distance between v1 and v2
+                double distance = haversineDistance(getLatitude(v1), getLongitude(v1), getLatitude(v2), getLongitude(v2));
 
 
-//void TspManager::TSPRec(int currentIndex, int currentDist, int *currentTour, int *Tour, bool *visited, double minTourCost) {
-////    if (currentIndex == graph.getNumVertex()) {
-////            currentDist += graph.getEdgeWeight(currentTour[currentIndex - 1], currentTour[0]);
-////            double currentCost = minTourCost;
-////            for (int j = 0; j < graph.getNumVertex(); j++) {
-////                currentCost += graph.getEdgeWeight(currentTour[j], currentTour[j + 1]);
-////            }
-////            if (currentCost < minTourCost) {
-////                minTourCost = currentCost;
-////                for (int j = 0; j < graph.getNumVertex(); j++) {
-////                    Tour[j] = currentTour[j];
-////                }
-////            }
-////        }
-////    } else {
-////        for (int j = 0; j < graph.getNumVertex(); j++) {
-////            if (!visited[j] && graph.isEdge(currentTour[i1], j)) {
-////                visited[j] = true;
-////                currentTour[i] = j;
-////                TSPRec(i + 1, j, currentTour, Tour, visited, minTourCost);
-////                visited[j] = false;
-////            }
-////        }
-////    }
-////
-////}
-//}
-//
+                // Add edge from v1 to v2
+                graphcopy.addEdge(v1->getInfo(), v2->getInfo(), distance);
+                // Add edge from v2 to v1 (assuming undirected graph)
+                graphcopy.addEdge(v2->getInfo(), v1->getInfo(), distance);
+            }
+        }
+    }
+    double TspManager::haversineDistance(double lat1, double lon1, double lat2, double lon2) {
+        // Convert latitude and longitude from degrees to radians
+        double lat1Rad = lat1 * M_PI / 180.0;
+        double lon1Rad = lon1 * M_PI / 180.0;
+        double lat2Rad = lat2 * M_PI / 180.0;
+        double lon2Rad = lon2 * M_PI / 180.0;
+
+        // Haversine formula
+        double dLat = lat2Rad - lat1Rad;
+        double dLon = lon2Rad - lon1Rad;
+        double a = sin(dLat / 2) * sin(dLat / 2) +
+                   cos(lat1Rad) * cos(lat2Rad) *
+                   sin(dLon / 2) * sin(dLon / 2);
+        double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+        double distance = 6371 * c; // Earth's radius in kilometers
+
+        return distance;
+    }
+
