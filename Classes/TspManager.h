@@ -13,6 +13,7 @@ public :
     TspManager(const Data &d);
     void TSPbacktracking();
     void TSPtriangularHeuristic();
+    void printNetworkInfo(const std::string& system);
 
 private:
     Graph<std::string> graph;
