@@ -1,10 +1,5 @@
-//
-// Created by darksystem on 04-05-2024.
-//
-
 #ifndef PROJ2_MENU_H
 #define PROJ2_MENU_H
-
 
 #include "Data.h"
 #include "TspManager.h"
@@ -40,11 +35,7 @@ public:
     template <class T>
     double TSPbacktrack(Graph<T> *graph);
 
-
-
 };
-
-
 
 
 #endif //PROJ2_MENU_H

@@ -5,7 +5,6 @@ using namespace std;
 
 Menu::Menu() {}
 
-
 void Menu::drawTop() {
     cout << "____________________________________________________" << endl;
     cout << "|" << "====================== Menu ======================" << "|" << endl;
@@ -20,13 +19,13 @@ void Menu::drawBottom() {
 
 void Menu::showMenu() {
     char key;
-    bool flag2 = true;
-    bool flag = true;
+    bool mainMenu = true;
+    bool subMenu = false;
 
     TspManager tspm;
     string system;
 
-    while (flag2) {
+    while (mainMenu) {
         drawTop();
         cout << "| 1. Real World Graphs                             |" << endl;
         cout << "| 2. Toy-Graphs                                    |" << endl;
@@ -48,170 +47,184 @@ void Menu::showMenu() {
                         system = "real1";
                         Data d = Data(system);
                         tspm = TspManager(d);
-                        flag2 = false;
+                        mainMenu = false;
+                        subMenu = true;
                         break;
                     }
                     case '2': {
                         system = "real2";
                         Data d = Data(system);
                         tspm = TspManager(d);
-                        flag2 = false;
+                        mainMenu = false;
+                        subMenu = true;
                         break;
                     }
                     case '3': {
                         system = "real3";
                         Data d = Data(system);
                         tspm = TspManager(d);
-                        flag2 = false;
+                        mainMenu = false;
+                        subMenu = true;
                         break;
                     }
                 }
-            }
                 break;
-                case '2': {
-                    drawTop();
-                    cout << "| 1. Load shipping.csv (Not fully connected graph) |" << endl;
-                    cout << "| 2. Load stadiums.csv                             |" << endl;
-                    cout << "| 3. Load tourism.csv                              |" << endl;
-                    drawBottom();
-                    cout << "Choose an option: ";
-                    cin >> key;
-                    switch (key) {
-                        case '1': {
-                            system = "shipping";
-                            Data d = Data(system);
-                            tspm = TspManager(d);
-                            flag2 = false;
-                            break;
-                        }
-                        case '2': {
-                            system = "stadiums";
-                            Data d = Data(system);
-                            tspm = TspManager(d);
-                            flag2 = false;
-                            break;
-                        }
-                        case '3': {
-                            system = "tourism";
-                            Data d = Data(system);
-                            tspm = TspManager(d);
-                            flag2 = false;
-                            break;
-                        }
-                    }
-                    break;
-                    case '3': {
-                        drawTop();
-                        cout << "| 1. Load Graph with 25 nodes                      |" << endl;
-                        cout << "| 2. Load Graph with 50 nodes                      |" << endl;
-                        cout << "| 3. Load Graph with 100 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 200 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 300 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 400 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 500 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 600 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 700 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 800 nodes                     |" << endl;
-                        cout << "| 3. Load Graph with 900 nodes                     |" << endl;
-                        drawBottom();
-                        cout << "Choose an option: ";
-                        cin >> key;
-                        switch (key) {
-                            case '1': {
-                                system = "25";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '2': {
-                                system = "50";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '3': {
-                                system = "100";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '4': {
-                                system = "200";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '5': {
-                                system = "300";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '6': {
-                                system = "400";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '7': {
-                                system = "500";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '8': {
-                                system = "600";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '9': {
-                                system = "700";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '10': {
-                                system = "800";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-                            case '11': {
-                                system = "900";
-                                Data d = Data(system);
-                                tspm = TspManager(d);
-                                flag2 = false;
-                                break;
-                            }
-
-                        }
+            }
+            case '2': {
+                drawTop();
+                cout << "| 1. Load shipping.csv (Not fully connected graph) |" << endl;
+                cout << "| 2. Load stadiums.csv                             |" << endl;
+                cout << "| 3. Load tourism.csv                              |" << endl;
+                drawBottom();
+                cout << "Choose an option: ";
+                cin >> key;
+                switch (key) {
+                    case '1': {
+                        system = "shipping";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
                         break;
                     }
-
+                    case '2': {
+                        system = "stadiums";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '3': {
+                        system = "tourism";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
                 }
-                default: {
-                    cout << endl << "Invalid option!" << endl;
-                    break;
+                break;
+            }
+            case '3': {
+                drawTop();
+                cout << "| 1. Load Graph with 25 nodes                      |" << endl;
+                cout << "| 2. Load Graph with 50 nodes                      |" << endl;
+                cout << "| 3. Load Graph with 100 nodes                     |" << endl;
+                cout << "| 4. Load Graph with 200 nodes                     |" << endl;
+                cout << "| 5. Load Graph with 300 nodes                     |" << endl;
+                cout << "| 6. Load Graph with 400 nodes                     |" << endl;
+                cout << "| 7. Load Graph with 500 nodes                     |" << endl;
+                cout << "| 8. Load Graph with 600 nodes                     |" << endl;
+                cout << "| 9. Load Graph with 700 nodes                     |" << endl;
+                cout << "| A. Load Graph with 800 nodes                     |" << endl;
+                cout << "| B. Load Graph with 900 nodes                     |" << endl;
+                drawBottom();
+                cout << "Choose an option: ";
+                cin >> key;
+                switch (key) {
+                    case '1': {
+                        system = "25";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '2': {
+                        system = "50";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '3': {
+                        system = "100";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '4': {
+                        system = "200";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '5': {
+                        system = "300";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '6': {
+                        system = "400";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '7': {
+                        system = "500";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '8': {
+                        system = "600";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case '9': {
+                        system = "700";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case 'A': {
+                        system = "800";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
+                    case 'B': {
+                        system = "900";
+                        Data d = Data(system);
+                        tspm = TspManager(d);
+                        mainMenu = false;
+                        subMenu = true;
+                        break;
+                    }
                 }
+                break;
+            }
+            default: {
+                cout << endl << "Invalid option!" << endl;
+                break;
             }
         }
 
-        while (flag) {
+        while (subMenu) {
             drawTop();
             cout << "| 1. Backtracking Algorithm                        |" << endl;
-            cout << "| 2. Triangular Heuristic Aproximation             |" << endl;
-            cout << "| 3. Reset Water Supply System                     |" << endl;
+            cout << "| 2. Triangular Heuristic Approximation            |" << endl;
+            cout << "| 3. Change Dataset                                |" << endl;
             cout << "| 4. Print Network Details                         |" << endl;
             cout << "| Q. Exit                                          |" << endl;
             drawBottom();
@@ -220,101 +233,18 @@ void Menu::showMenu() {
             switch (key) {
                 case '1': {
                     tspm.TSPbacktracking();
-
-/*
-                    char key1;
-                    drawTop();
-                    cout << "| 1. Maximum amount of water that reaches each city|" << endl;
-                    cout << "| 2. View cities that have less water than demand  |" << endl;
-                    cout << "| Q. Exit                                          |" << endl;
-                    drawBottom();
-                    cout << "Choose an option: ";
-                    cin >> key1;
-                    switch (key1) {
-                        case '1': {
-//                        wsm.maxFlowToCities();
-                            break;
-                        }
-                        case '2': {
-//                        wsm.demandCoverage();
-                            break;
-                        }
-
-                        case 'Q' : {
-                            break;
-                        }
-                        default: {
-                            cout << endl << "Invalid option!" << endl;
-                        }
-                    };
                     break;
-*/
-                break;
                 }
                 case '2': {
                     tspm.TSPtriangularHeuristic();
-                    /* char key1;
-                     drawTop();
-                     cout
-                             << "| 1. Evaluate the impact of a water reservoir      | \n|  that is temporarily unavailable                 |"
-                             << endl;
-                     cout
-                             << "| 2. Evaluate the impact of a pumping station      | \n|  that is temporarily unavailable                 |"
-                             << endl;
-                     cout
-                             << "| 3. Evaluate the impact of a pipe that is         | \n|  temporarily unavailable                         |"
-                             << endl;
-                     cout << "| Q. Exit                                          |" << endl;
-                     drawBottom();
-                     cout << "Choose an option: ";
-                     cin >> key1;
-                     switch (key1) {
-                         case '1': {
-                             string reservoir;
-                             cout << "Enter the code of the reservoir (ex:R_1,R_2...): ";
-                             cin >> reservoir;
- //                        wsm.evaluateVertexRemoval(reservoir);
-
-                             break;
-                         }
-                         case '2': {
-                             string pumpingStation;
-                             cout << "Enter the code of the pumping station (ex:PS_1,PS_2...): ";
-                             cin >> pumpingStation;
- //                        wsm.evaluateVertexRemoval(pumpingStation);
-                             break;
-                         }
-                         case '3': {
-                             string source, destination;
-                             cout << "Enter the code of the source: ";
-                             cin >> source;
-                             cout << "Enter the code of the destination: ";
-                             cin >> destination;
- //                        wsm.evaluateEdgeRemoval(source, destination);
-                             break;
-                         }
-
-
-                         case 'Q' : {
-                             break;
-                         }
-                         default: {
-                             cout << endl << "Invalid option!" << endl;
-                         }
-                     };
-                     break;
-
-                 }*/
                     break;
                 }
-
-                case '3' : {
-                    cout << "Water Supply System reset successfully ";
-                    Data data = Data(system);
-//                wsm = WaterSupplyManager(data);
+                case '3': {
+                    mainMenu = true;
+                    subMenu = false;
                     break;
                 }
-                case '4' : {
+                case '4': {
                     char key1;
                     drawTop();
                     cout << "| 1. Print Cities Details                          |" << endl;
@@ -326,15 +256,15 @@ void Menu::showMenu() {
                     cin >> key1;
                     switch (key1) {
                         case '1': {
-//                        wsm.printCitiesDetails();
+                            // wsm.printCitiesDetails();
                             break;
                         }
                         case '2': {
-//                        wsm.printReservoirsDetails();
+                            // wsm.printReservoirsDetails();
                             break;
                         }
                         case '3': {
-//                        wsm.printStationsDetails();
+                            // wsm.printStationsDetails();
                             break;
                         }
                         case 'Q' : {
@@ -347,27 +277,27 @@ void Menu::showMenu() {
                     break;
                 }
                 case 'Q' : {
+                    mainMenu = false;
+                    subMenu = false;
                     break;
                 }
                 default: {
                     cout << endl << "Invalid option!" << endl;
                 }
+            }
 
-            };
-
-            cout << endl;
-            cout << "Would you like to do something else? (Y/N) \n";
-            char newCicle;
-            cin >> newCicle;
-            if (newCicle == 'N') flag = false;
-            while (newCicle != 'Y') {
-                if (newCicle == 'N') {
-                    flag = false;
-                    break;
+            if (subMenu) {
+                cout << endl;
+                cout << "Would you like to do something else? (Y/N) \n";
+                char newCycle;
+                cin >> newCycle;
+                if (newCycle == 'N') subMenu = false;
+                while (newCycle != 'Y' && newCycle != 'N') {
+                    cout << "Please type \"Y\" or \"N\"." << endl;
+                    cin >> newCycle;
+                    if (newCycle == 'N') subMenu = false;
                 }
-                cout << "Please type \"Y\" or \"N\"." << endl;
-                cin >> newCicle;
             }
         }
     }
-
+}
