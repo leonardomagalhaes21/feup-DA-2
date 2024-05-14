@@ -1,14 +1,11 @@
 #include "Data.h"
 #include <iostream>
 #include <sstream>
-
-
-
 using namespace std;
 
 Data::Data(const std::string &s) {
-    if (s == "tourism") {
-        readToyGraphs("../dataset/Toy-Graphs/tourism.csv");
+    if (s == "shipping") {
+        readToyGraphs("../dataset/Toy-Graphs/shipping.csv");
     } else if (s == "stadiums") {
         readToyGraphs("../dataset/Toy-Graphs/stadiums.csv");
     } else if (s == "tourism") {

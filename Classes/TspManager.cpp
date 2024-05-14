@@ -1,11 +1,7 @@
-//
-// Created by darksystem on 07-05-2024.
-//
-
 #include "TspManager.h"
 #include <iostream>
-
 using namespace std;
+
 TspManager::TspManager() {
     graph = {};
 }
@@ -24,6 +20,7 @@ void TspManager::TSPbacktracking() {
         for (int i = 0; i < bestTour.size(); i++) {
             cout << bestTour[i] << " ";
         }
+        cout << bestTour[0];
         cout << endl;
     } else {
         cout << "Graph is empty" << endl;
@@ -84,44 +81,49 @@ double TspManager::getEdgeWeight(Graph<std::string> graph, int node, int i) {
 }
 
 void TspManager::TSPtriangularHeuristic() {
-    if(!graph.getVertexSet().empty()){
+    if (!graph.getVertexSet().empty()) {
         vector<int> bestTour;
         TSPtriangularHeuristicMethod(bestTour);
         cout << "Best tour: ";
         for (int i = 0; i < bestTour.size(); i++) {
             cout << bestTour[i] << " ";
         }
+        cout << bestTour[0];
         cout << endl;
     } else {
         cout << "Graph is empty" << endl;
     }
 }
 
-void TspManager::TSPtriangularHeuristicMethod(std::vector<int> &vector1) {
+void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour) {
     vector<int> tour;
     vector<bool> visited(graph.getNumVertex(), false);
     int startNode = 0;
     tour.push_back(startNode);
     visited[startNode] = true;
-    int nextNode = 0;
+    int currentNode = startNode;
     while (tour.size() < graph.getNumVertex()) {
-        double minDist = INT_MAX;
+        double minDist = numeric_limits<double>::max();
+        int nextNode = -1;
         for (int i = 0; i < graph.getNumVertex(); i++) {
             if (!visited[i]) {
                 auto nextNodev = graph.findVertex(to_string(i));
-                auto iv = graph.findVertex(to_string(nextNode));
-                double dist;
-                dist = graph.getEdgeWeight(nextNodev->getInfo(), iv->getInfo());
+                auto currentNodev = graph.findVertex(to_string(currentNode));
+                double dist = graph.getEdgeWeight(currentNodev->getInfo(), nextNodev->getInfo());
                 if (dist < minDist) {
                     minDist = dist;
                     nextNode = i;
                 }
             }
         }
+        if (nextNode == -1) {
+            break;
+        }
         tour.push_back(nextNode);
         visited[nextNode] = true;
+        currentNode = nextNode;
     }
-    vector1 = tour;
+    bestTour = tour;
 }
 
 

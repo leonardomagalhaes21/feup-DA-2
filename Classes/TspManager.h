@@ -1,7 +1,3 @@
-//
-// Created by darksystem on 07-05-2024.
-//
-
 #ifndef PROJ2_TSPMANAGER_H
 #define PROJ2_TSPMANAGER_H
 #include "Data.h"
@@ -15,10 +11,7 @@ class TspManager {
 public :
     TspManager();
     TspManager(const Data &d);
-
-
     void TSPbacktracking();
-
     void TSPtriangularHeuristic();
 
 private:
@@ -26,19 +19,10 @@ private:
     std::unordered_map<int, std::pair<float, float>> nodesloc;
     std::unordered_map<int, std::string> labels;
 
-
-
     void TSPbacktrackingMethod(std::vector<int> &bestTour);
-
-
-
     void TSPRec(std::vector<int>& vector1, std::vector<bool>&  vector2, double d, double&  cost, std::vector<int> &vector3);
-
-
     bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
-
     double getEdgeWeight(Graph<std::string> graph, int node, int i);
-
     void TSPtriangularHeuristicMethod(std::vector<int> &vector1);
 };
 
