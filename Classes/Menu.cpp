@@ -258,7 +258,8 @@ void Menu::showMenu() {
                     break;
                 }
                 case '3': {
-                    tspm.TSPprim();
+                    bool flag = (system == "real1" || system == "real2" || system == "real3" || system == "tourism");
+                    tspm.TSPprim(flag);
                     break;
                 }
                 case '4': {
