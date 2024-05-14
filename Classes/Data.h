@@ -25,7 +25,7 @@ public:
 
     void readToyGraphsTourism(const std::string &filename);
 
-    void readNodesExtra(const std::string &filename);
+    void readNodesExtra(const std::string &filename, int limit);
 
 
     const std::unordered_map<int, std::pair<float, float>> getNodesLoc() const;
