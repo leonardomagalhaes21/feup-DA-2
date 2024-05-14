@@ -25,38 +25,38 @@ Data::Data(const std::string &s) {
         readGraphs("../dataset/Real-world Graphs/graph3/edges.csv");
 
     } else if (s == "25") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_25.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "50") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_50.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "100") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_100.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "200") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_200.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "300") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_300.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "400") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_400.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "500") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_500.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "600") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_600.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "700") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_700.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "800") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_800.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     } else if (s == "900") {
+        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv", stoi(s));
         readExtraGraphs("../dataset/Extra_Fully_Connected_Graphs/edges_900.csv");
-        readNodesExtra("../dataset/Extra_Fully_Connected_Graphs/nodes.csv");
     }
 }
 
@@ -123,8 +123,6 @@ void Data::readExtraGraphs(const std::string &filename) {
         getline(linestream, temp, ',');
         distance = stof(temp);
 
-        graph.addVertex(vertex1);
-        graph.addVertex(vertex2);
         graph.addEdge(vertex1, vertex2, distance);
         graph.addEdge(vertex2, vertex1, distance);
     }
@@ -221,7 +219,7 @@ void Data::readNodes(const std::string &filename) {
 
 }
 
-void Data::readNodesExtra(const std::string &filename) {
+void Data::readNodesExtra(const std::string &filename, int limit) {
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -231,7 +229,7 @@ void Data::readNodesExtra(const std::string &filename) {
 
     string line;
     getline(file, line);
-    while (getline(file, line)) {
+    while (getline(file, line) && limit > 0) {
         stringstream linestream(line);
         string temp;
         int id;
@@ -245,7 +243,9 @@ void Data::readNodesExtra(const std::string &filename) {
         getline(linestream, temp, ',');
         value2 = stof(temp);
 
+        graph.addVertex(to_string(id));
         nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
+        limit--;
     }
 }
 
