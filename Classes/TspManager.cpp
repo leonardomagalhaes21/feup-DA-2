@@ -127,7 +127,31 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour) {
 }
 
 
-
+void TspManager::printNetworkInfo(const string& system){
+    if (system == "real1" || system == "real2" || system == "real3") {
+        for (auto node : nodesloc) {
+            cout << "Vertex: " << node.first << " X: " << node.second.first << " Y: " << node.second.second << endl;
+        }
+    }
+    else if (system == "tourism"){
+        for (const auto& label : labels) {
+            cout << "Vertex: " << label.first << " Label: " << label.second << endl;
+        }
+    }
+    else if (system == "stadiums" || system == "shipping") {
+        for (auto vertex : graph.getVertexSet()) {
+            cout << "Vertex: " << vertex->getInfo() << endl;
+        }
+    }
+    else {
+        for (auto vertex : graph.getVertexSet()) {
+            auto node = nodesloc.find(stoi(vertex->getInfo()));
+            if (node != nodesloc.end()) {
+                cout << "Vertex: " << vertex->getInfo() << " X: " << node->second.first << " Y: " << node->second.second << endl;
+            }
+        }
+    }
+}
 
 
 //void TspManager::TSPRec(int currentIndex, int currentDist, int *currentTour, int *Tour, bool *visited, double minTourCost) {
