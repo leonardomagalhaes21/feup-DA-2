@@ -18,7 +18,7 @@ public :
 
     void TSPtriangularHeuristic();
 
-    void TSPprim();
+    void TSPprim(bool incompleteGraph);
 
 
     void printNetworkInfo(const std::string &system);

@@ -136,8 +136,10 @@ struct CompareEdgeWeights {
     }
 };
 
-void TspManager::TSPprim() {
-    CompleteGraph(graph);
+void TspManager::TSPprim(bool incompleteGraph) {
+    if (incompleteGraph){
+        CompleteGraph(graph);
+    }
     if (graph.getNumVertex() == 0) return;
     Vertex<std::string> *startVertex = graph.getVertexSet()[0];
 
