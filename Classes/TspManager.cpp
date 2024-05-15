@@ -286,3 +286,63 @@ double TspManager::haversineDistance(double lat1, double lon1, double lat2, doub
     return distance;
 }
 
+void TspManager::TSPtriangularHeuristicInput() {
+    if (!graph.getVertexSet().empty()) {
+        int startNode;
+        cout << "Enter the starting node: ";
+        cin >> startNode;
+
+        if (startNode < 0 || startNode >= graph.getNumVertex()) {
+            cout << "Invalid starting node!" << endl;
+            return;
+        }
+
+        vector<int> bestTour;
+        TSPtriangularHeuristicMethod(bestTour, startNode);
+        cout << "Best tour: ";
+        int sum = 0;
+        for (int i = 0; i < bestTour.size(); i++) {
+            cout << bestTour[i] << " ";
+            if (i > 0) {
+                sum += getEdgeWeight(graph, bestTour[i-1], bestTour[i]);
+            }
+        }
+
+        sum += graph.getEdgeWeight(to_string(bestTour.back()), to_string(bestTour[0]));
+        cout << bestTour[0] << endl;
+        cout << "Total distance: " << sum << endl;
+    } else {
+        cout << "Graph is empty" << endl;
+    }
+}
+
+void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour, int startNode) {
+    vector<int> tour;
+    vector<bool> visited(graph.getNumVertex(), false);
+    tour.push_back(startNode);
+    visited[startNode] = true;
+    int currentNode = startNode;
+    while (tour.size() < graph.getNumVertex()) {
+        double minDist = numeric_limits<double>::max();
+        int nextNode = -1;
+        for (int i = 0; i < graph.getNumVertex(); i++) {
+            if (!visited[i]) {
+                auto nextNodev = graph.findVertex(to_string(i));
+                auto currentNodev = graph.findVertex(to_string(currentNode));
+                double dist = graph.getEdgeWeight(currentNodev->getInfo(), nextNodev->getInfo());
+                if (dist < minDist) {
+                    minDist = dist;
+                    nextNode = i;
+                }
+            }
+        }
+        if (nextNode == -1) {
+            break;
+        }
+        tour.push_back(nextNode);
+        visited[nextNode] = true;
+        currentNode = nextNode;
+    }
+    bestTour = tour;
+}
+

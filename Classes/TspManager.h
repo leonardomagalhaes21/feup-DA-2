@@ -21,8 +21,9 @@ public :
 
     void TSPprim(bool incompleteGraph);
 
-
     void printNetworkInfo(const std::string &system);
+
+    void TSPtriangularHeuristicInput();
 
 
 private:
@@ -31,7 +32,6 @@ private:
     std::unordered_map<int, std::string> labels;
 
     void TSPbacktrackingMethod(std::vector<int> &bestTour);
-
 
     void TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
 
@@ -47,8 +47,9 @@ private:
 
     float getLongitude(Vertex<std::string> *vertex) const;
 
-
     double haversineDistance(double lat1, double lon1, double lat2, double lon2);
+
+    void TSPtriangularHeuristicMethod(std::vector<int> &bestTour, int startNode);
 };
 
 
