@@ -10,4 +10,5 @@ add_executable(proj2 main.cpp
         Classes/Menu.cpp
         Classes/TspManager.h
         Classes/TspManager.cpp
+        Classes/MutablePriorityQueue.h
 )
