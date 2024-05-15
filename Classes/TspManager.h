@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <climits>
 #include <iomanip>
+#include <chrono>
 
 class TspManager {
 public :
@@ -32,14 +33,13 @@ private:
     void TSPbacktrackingMethod(std::vector<int> &bestTour);
 
 
-    void
-    TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
+    void TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
 
     bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
 
     double getEdgeWeight(Graph<std::string> graph, int node, int i);
 
-    void TSPtriangularHeuristicMethod(std::vector<int> &vector1);
+    void TSPtriangularHeuristicMethod(std::vector<int> &vector1, double &totalWeight);
 
     void CompleteGraph(Graph<std::string> graphcopy);
 
