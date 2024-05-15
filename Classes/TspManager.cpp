@@ -16,41 +16,49 @@ TspManager::TspManager(const Data &d) {
 
 void TspManager::TSPbacktracking() {
     if (!graph.getVertexSet().empty()) {
-        vector<int> bestTour;
+        std::vector<int> bestTour;
         TSPbacktrackingMethod(bestTour);
-        cout << "Best tour: ";
+        std::cout << "Best tour: ";
+        int sum=0;
         for (int i = 0; i < bestTour.size(); i++) {
-            cout << bestTour[i] << " ";
+            std::cout << bestTour[i] << " ";
+            if (i > 0) {
+                sum += getEdgeWeight(graph, bestTour[i-1], bestTour[i]);
+            }
         }
-        cout << bestTour[0];
-        cout << endl;
+        std::cout << std::endl << "Total Distance: " << sum << std::endl;
     } else {
-        cout << "Graph is empty" << endl;
+        std::cout << "Graph is empty" << std::endl;
     }
 }
 
-void TspManager::TSPbacktrackingMethod(vector<int> &bestTour) {
+void TspManager::TSPbacktrackingMethod(std::vector<int>& bestTour) {
     double minTourCost = INT_MAX;
     int startNode = 0;
-    vector<int> tour = {startNode};
-    vector<bool> visited(graph.getNumVertex(), false);
+    std::vector<int> tour = { startNode };
+    std::vector<bool> visited(graph.getNumVertex(), false);
     visited[startNode] = true;
     TSPRec(tour, visited, 0.0, minTourCost, bestTour);
-
 }
 
-void TspManager::TSPRec(vector<int> &tour, vector<bool> &visited, double currentCost, double &minCost,
-                        vector<int> &bestTour) {
-    if (tour.size() == graph.getNumVertex()) {
-        minCost = min(minCost, currentCost);
-        if (currentCost == minCost) {
-            bestTour = tour;
-            return;
+void TspManager::TSPRec(std::vector<int>& tour, std::vector<bool>& visited, double currentCost, double& minCost, std::vector<int>& bestTour) {
+    int numVertices = graph.getNumVertex();
+
+    if (tour.size() == numVertices) {
+        int lastNode = tour.back();
+        double returnCost = getEdgeWeight(graph, lastNode, tour[0]);
+        if (returnCost > 0) {
+            double totalCost = currentCost + returnCost;
+            if (totalCost < minCost) {
+                minCost = totalCost;
+                bestTour = tour;
+                bestTour.push_back(tour[0]);
+            }
         }
     } else {
-        for (int i = 0; i < graph.getNumVertex(); ++i) {
+        for (int i = 0; i < numVertices; ++i) {
             if (!visited[i]) {
-                int lastNode = tour.back();//tour[tour.size()-1];
+                int lastNode = tour.back();
                 if (hasEdge(graph.findVertex(std::to_string(lastNode)), graph.findVertex(std::to_string(i)))) {
                     visited[i] = true;
                     tour.push_back(i);
@@ -63,18 +71,17 @@ void TspManager::TSPRec(vector<int> &tour, vector<bool> &visited, double current
     }
 }
 
-bool TspManager::hasEdge(Vertex<string> *pVertex, Vertex<string> *pVertex1) {
-    for (auto edge: pVertex->getAdj()) {
+bool TspManager::hasEdge(Vertex<std::string>* pVertex, Vertex<std::string>* pVertex1) {
+    for (auto edge : pVertex->getAdj()) {
         if (edge->getDest() == pVertex1) {
             return true;
         }
     }
-
     return false;
 }
 
-double TspManager::getEdgeWeight(Graph<std::string> graph, int node, int i) {
-    for (auto edge: graph.findVertex(std::to_string(node))->getAdj()) {
+double TspManager::getEdgeWeight(Graph<std::string>& graph, int node, int i) {
+    for (auto edge : graph.findVertex(std::to_string(node))->getAdj()) {
         if (edge->getDest()->getInfo() == std::to_string(i)) {
             return edge->getWeight();
         }
