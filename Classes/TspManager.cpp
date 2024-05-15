@@ -160,35 +160,36 @@ struct CompareEdgeWeights {
     }
 };
 
-void TspManager::TSPprim(bool incompleteGraph) {
-    if (incompleteGraph) {
-        CompleteGraph(graph);
-    }
-    if (graph.getNumVertex() == 0) return;
-    Vertex<std::string> *startVertex = graph.getVertexSet()[0];
+Graph<string> TspManager::copyGraph(const Graph<string>& originalGraph) {
+    Graph<string> copiedGraph;
 
-    std::unordered_set<Vertex<std::string> *> visitedVertices;
-    std::priority_queue<Edge<std::string> *, std::vector<Edge<std::string> *>, CompareEdgeWeights<std::string>> pq;
-    visitedVertices.insert(startVertex);
-    for (Edge<std::string> *edge: startVertex->getAdj()) {
-        pq.push(edge);
+    for (auto v : originalGraph.getVertexSet()) {
+        copiedGraph.addVertex(v->getInfo());
     }
+
+    for (auto v : originalGraph.getVertexSet()) {
+        for (auto e : v->getAdj()) {
+            copiedGraph.addEdge(v->getInfo(), e->getDest()->getInfo(), e->getWeight());
+        }
+    }
+
+    return copiedGraph;
+}
+
+
+void TspManager::TSPprim(bool incompleteGraph) {
+
+    Graph<string> graphTemp = copyGraph(graph);
+    if (incompleteGraph) {
+        CompleteGraph(graphTemp);
+    }
+
+    Vertex<std::string> *startVertex = graphTemp.getVertexSet()[0];
     std::vector<Edge<std::string> *> shortestPathEdges;
 
     auto start = chrono::high_resolution_clock::now();
 
-    while (!pq.empty() && visitedVertices.size() < graph.getNumVertex()) {
-        Edge<std::string> *minEdge = pq.top();
-        pq.pop();
-        Vertex<std::string> *destVertex = minEdge->getDest();
-        if (visitedVertices.find(destVertex) == visitedVertices.end()) {
-            visitedVertices.insert(destVertex);
-            shortestPathEdges.push_back(minEdge);
-            for (Edge<std::string> *edge: destVertex->getAdj()) {
-                pq.push(edge);
-            }
-        }
-    }
+    TSPprimMethod(graphTemp, startVertex, shortestPathEdges);
 
     auto end = chrono::high_resolution_clock::now();
 
@@ -204,12 +205,37 @@ void TspManager::TSPprim(bool incompleteGraph) {
     if (!shortestPathEdges.empty()) {
         Vertex<std::string> *lastVertex = shortestPathEdges.back()->getDest();
         std::cout << lastVertex->getInfo() << " -> " << startVertex->getInfo() << " (Weight: "
-                  << graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo()) << ")" << std::endl;
-        totalWeight += graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo());
+                  << graphTemp.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo()) << ")" << std::endl;
+        totalWeight += graphTemp.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo());
     }
 
     std::cout << "Total weight: " << totalWeight << std::endl;
     std::cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+}
+
+
+void TspManager::TSPprimMethod(const Graph<string>& graphTemp, Vertex<std::string> *startVertex, std::vector<Edge<std::string> *> &shortestPathEdges) {
+    if (graphTemp.getNumVertex() == 0) return;
+
+    std::unordered_set<Vertex<std::string> *> visitedVertices;
+    std::priority_queue<Edge<std::string> *, std::vector<Edge<std::string> *>, CompareEdgeWeights<std::string>> pq;
+    visitedVertices.insert(startVertex);
+    for (Edge<std::string> *edge: startVertex->getAdj()) {
+        pq.push(edge);
+    }
+
+    while (!pq.empty() && visitedVertices.size() < graphTemp.getNumVertex()) {
+        Edge<std::string> *minEdge = pq.top();
+        pq.pop();
+        Vertex<std::string> *destVertex = minEdge->getDest();
+        if (visitedVertices.find(destVertex) == visitedVertices.end()) {
+            visitedVertices.insert(destVertex);
+            shortestPathEdges.push_back(minEdge);
+            for (Edge<std::string> *edge: destVertex->getAdj()) {
+                pq.push(edge);
+            }
+        }
+    }
 }
 
 float TspManager::getLatitude(Vertex<std::string> *vertex) const {
@@ -349,3 +375,47 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour, int startNo
     bestTour = tour;
 }
 
+
+
+void TspManager::compareAlgorithmsPerformance(bool incompleteGraph) {
+    std::vector<int> bestTour;
+    double totalWeight = INT_MAX;
+
+    auto start = chrono::high_resolution_clock::now();
+    TSPbacktrackingMethod(bestTour, totalWeight);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start;
+    std::cout << "Total weight: " << totalWeight << std::endl;
+    std::cout << "Time taken by backtracking algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+    cout << "----------------//----------------" << endl;
+
+    bestTour = {};
+    totalWeight = 0;
+    start = chrono::high_resolution_clock::now();
+    TSPtriangularHeuristicMethod(bestTour, totalWeight);
+    end = chrono::high_resolution_clock::now();
+    duration = end - start;
+    totalWeight += getEdgeWeight(graph, bestTour.back(), bestTour[0]);
+    std::cout << "Total weight: " << totalWeight << std::endl;
+    std::cout << "Time taken by triangular heuristic algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+    cout << "----------------//----------------" << endl;
+
+    totalWeight = 0;
+    Graph<std::string> graphTemp = copyGraph(graph);
+    if (incompleteGraph)
+        CompleteGraph(graphTemp);
+    std::vector<Edge<std::string> *> shortestPathEdges;
+    start = chrono::high_resolution_clock::now();
+    TSPprimMethod(graphTemp, graphTemp.getVertexSet()[0], shortestPathEdges);
+    end = chrono::high_resolution_clock::now();
+    for (Edge<std::string> *edge: shortestPathEdges) {
+        totalWeight += edge->getWeight();
+    }
+    if (!shortestPathEdges.empty()) {
+        Vertex<std::string> *lastVertex = shortestPathEdges.back()->getDest();
+        totalWeight += graphTemp.getEdgeWeight(lastVertex->getInfo(), graphTemp.getVertexSet()[0]->getInfo());
+    }
+    duration = end - start;
+    std::cout << "Total weight: " << totalWeight << std::endl;
+    std::cout << "Time taken by prim algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+}

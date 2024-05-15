@@ -267,7 +267,8 @@ void Menu::showMenu() {
             cout << "| 2. Triangular Heuristic Approximation            |" << endl;
             cout << "| 3. Prim's Algorithm                              |" << endl;
             cout << "| 4. Print Network Details                         |" << endl;
-            cout << "| 5. Change Dataset                                |" << endl;
+            cout << "| 5. Comparative Analysis                          |" << endl;
+            cout << "| 6. Change Dataset                                |" << endl;
             cout << "| Q. Exit                                          |" << endl;
             drawBottom();
             cout << "Choose an option: ";
@@ -278,11 +279,14 @@ void Menu::showMenu() {
                     break;
                 }
                 case '2': {
-                    tspm.TSPtriangularHeuristic();
+                    if (system != "shipping")
+                        tspm.TSPtriangularHeuristic();
+                    else
+                        cout << "This option is not available for this dataset." << endl;
                     break;
                 }
                 case '3': {
-                    bool flag = (system == "real1" || system == "real2" || system == "real3" || system == "shopping");
+                    bool flag = (system == "real1" || system == "real2" || system == "real3");
                     tspm.TSPprim(flag);
                     break;
                 }
@@ -292,6 +296,11 @@ void Menu::showMenu() {
                     break;
                 }
                 case '5': {
+                    bool flag = (system == "real1" || system == "real2" || system == "real3");
+                    tspm.compareAlgorithmsPerformance(flag);
+                    break;
+                }
+                case '6': {
                     mainMenu = true;
                     subMenu = false;
                     break;

@@ -25,6 +25,8 @@ public :
 
     void TSPtriangularHeuristicInput();
 
+    void compareAlgorithmsPerformance(bool incompleteGraph);
+
 
 private:
     Graph<std::string> graph;
@@ -50,6 +52,11 @@ private:
     double haversineDistance(double lat1, double lon1, double lat2, double lon2);
 
     void TSPtriangularHeuristicMethod(std::vector<int> &bestTour, int startNode);
+
+    void TSPprimMethod(const Graph<std::string>& graphTemp, Vertex<std::string> *startVertex, std::vector<Edge<std::string> *> &shortestPathEdges);
+
+    Graph<std::string> copyGraph(const Graph<std::string>& originalGraph);
+
 };
 
 
