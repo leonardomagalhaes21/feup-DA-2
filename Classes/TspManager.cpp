@@ -137,7 +137,7 @@ struct CompareEdgeWeights {
 };
 
 void TspManager::TSPprim(bool incompleteGraph) {
-    if (incompleteGraph){
+    if (incompleteGraph) {
         CompleteGraph(graph);
     }
     if (graph.getNumVertex() == 0) return;
