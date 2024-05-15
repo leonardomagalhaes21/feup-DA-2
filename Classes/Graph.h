@@ -187,7 +187,7 @@ public:
 
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
-    std::unordered_map<std::string, Vertex<T>*> vertexMap;
+    std::unordered_map<std::string, Vertex<T> *> vertexMap;
 
     double **distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
@@ -415,8 +415,9 @@ template<class T>
 std::vector<Vertex<T> *> Graph<T>::getVertexSet() const {
     return vertexSet;
 }
+
 template<class T>
-std::unordered_map<std::string, Vertex<T>*> Graph<T>::getVertexMap() const {
+std::unordered_map<std::string, Vertex<T> *> Graph<T>::getVertexMap() const {
     return vertexMap;
 }
 
@@ -431,7 +432,7 @@ Vertex<T> *Graph<T>::findVertex(const T &in) const {
     return nullptr;
 }*/
 template<class T>
-Vertex<T> * Graph<T>::findVertex(const T &in) const {
+Vertex<T> *Graph<T>::findVertex(const T &in) const {
     auto it = vertexMap.find(in);
     if (it != vertexMap.end()) {
         return it->second;
@@ -494,12 +495,11 @@ bool Graph<T>::removeVertex(const T &in) {
     if (it == vertexMap.end()) {
         return false;
     }
-    Vertex<T>* v = it->second;
-    for (auto u : vertexSet) {
+    Vertex<T> *v = it->second;
+    for (auto u: vertexSet) {
         if (u != v) {
             u->removeEdge(v->getInfo());
-        }
-        else {
+        } else {
             u->removeOutgoingEdges();
         }
     }

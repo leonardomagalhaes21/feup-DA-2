@@ -15,7 +15,7 @@ Data::Data(const std::string &s) {
     } else if (s == "real1") {
         readNodes("../dataset/Real-world Graphs/graph1/nodes.csv");
         readGraphs("../dataset/Real-world Graphs/graph1/edges.csv");
-        
+
     } else if (s == "real2") {
         readNodes("../dataset/Real-world Graphs/graph2/nodes.csv");
         readGraphs("../dataset/Real-world Graphs/graph2/edges.csv");
