@@ -280,9 +280,9 @@ void Menu::showMenu() {
                 }
                 case '2': {
                     if (system != "shipping")
-                        tspm.TSPtriangularHeuristic();
+                        tspm.TSPtriangularHeuristicInput();                   
                     else
-                        cout << "This option is not available for this dataset." << endl;
+                        cout << "This option is not available for this dataset." << endl;                    
                     break;
                 }
                 case '3': {

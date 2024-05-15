@@ -8,6 +8,7 @@
 #include <climits>
 #include <iomanip>
 #include <chrono>
+#include "MutablePriorityQueue.h"
 
 class TspManager {
 public :
@@ -53,10 +54,30 @@ private:
 
     void TSPtriangularHeuristicMethod(std::vector<int> &bestTour, int startNode);
 
+  
+    void triangularHeuristicAproximation2(const std::string &startNodeId);
+
+
+    std::vector<Vertex<std::string> *> prim(Graph<std::string> g);
+
+    std::vector<Vertex<std::string>*> getAproximationTour() {
+        return aproximationtour;
+    }
+
+    double getAproximationTourCost() {
+        return aproximationtourCost;
+    }
+
+    std::vector<Vertex<std::string>*> aproximationtour;
+    double aproximationtourCost;
+
+    double calculateTourCost(std::vector<Vertex<std::string> *> vector1);
+
+    void dfsMST(Vertex<std::string> *v, const std::vector<Vertex<std::string> *> &mst);
+  
     void TSPprimMethod(const Graph<std::string>& graphTemp, Vertex<std::string> *startVertex, std::vector<Edge<std::string> *> &shortestPathEdges);
 
     Graph<std::string> copyGraph(const Graph<std::string>& originalGraph);
-
 };
 
 
