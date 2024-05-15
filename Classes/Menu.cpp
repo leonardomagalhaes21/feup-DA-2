@@ -258,7 +258,7 @@ void Menu::showMenu() {
                     break;
                 }
                 case '3': {
-                    bool flag = (system == "real1" || system == "real2" || system == "real3");
+                    bool flag = (system == "real1" || system == "real2" || system == "real3" || system == "shopping");
                     tspm.TSPprim(flag);
                     break;
                 }

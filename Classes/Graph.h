@@ -187,6 +187,7 @@ public:
 
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
+    std::unordered_map<std::string, Vertex<T>*> vertexMap;
 
     double **distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
@@ -202,6 +203,7 @@ protected:
     void resetNodes();
 
 
+    std::unordered_map<std::string, Vertex<T> *> getVertexMap() const;
 };
 
 void deleteMatrix(int **m, int n);
@@ -413,15 +415,27 @@ template<class T>
 std::vector<Vertex<T> *> Graph<T>::getVertexSet() const {
     return vertexSet;
 }
+template<class T>
+std::unordered_map<std::string, Vertex<T>*> Graph<T>::getVertexMap() const {
+    return vertexMap;
+}
 
 /*
  * Auxiliary function to find a vertex with a given content.
  */
-template<class T>
+/*template<class T>
 Vertex<T> *Graph<T>::findVertex(const T &in) const {
     for (auto v: vertexSet)
         if (v->getInfo() == in)
             return v;
+    return nullptr;
+}*/
+template<class T>
+Vertex<T> * Graph<T>::findVertex(const T &in) const {
+    auto it = vertexMap.find(in);
+    if (it != vertexMap.end()) {
+        return it->second;
+    }
     return nullptr;
 }
 
@@ -447,6 +461,7 @@ bool Graph<T>::addVertex(const T &in) {
         return false;
     Vertex<T> *newVertex = new Vertex<T>(in);
     vertexSet.push_back(newVertex);
+    vertexMap[in] = newVertex;
     /*nodesMAP.insert({in, newVertex});*/
     return true;
 }
@@ -457,7 +472,7 @@ bool Graph<T>::addVertex(const T &in) {
  *  all outgoing and incoming edges.
  *  Returns true if successful, and false if such vertex does not exist.
  */
-template<class T>
+/*template<class T>
 bool Graph<T>::removeVertex(const T &in) {
     for (auto it = vertexSet.begin(); it != vertexSet.end(); it++) {
         if ((*it)->getInfo() == in) {
@@ -472,7 +487,28 @@ bool Graph<T>::removeVertex(const T &in) {
         }
     }
     return false;
+}*/
+template<class T>
+bool Graph<T>::removeVertex(const T &in) {
+    auto it = vertexMap.find(in);
+    if (it == vertexMap.end()) {
+        return false;
+    }
+    Vertex<T>* v = it->second;
+    for (auto u : vertexSet) {
+        if (u != v) {
+            u->removeEdge(v->getInfo());
+        }
+        else {
+            u->removeOutgoingEdges();
+        }
+    }
+    vertexSet.erase(std::remove(vertexSet.begin(), vertexSet.end(), v), vertexSet.end());
+    vertexMap.erase(it);
+    delete v;
+    return true;
 }
+
 
 template<class T>
 void Graph<T>::resetNodes() {
