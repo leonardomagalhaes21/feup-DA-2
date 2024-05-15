@@ -61,7 +61,6 @@ void TspManager::TSPRec(vector<int> &tour, vector<bool> &visited, double current
             }
         }
     }
-
 }
 
 bool TspManager::hasEdge(Vertex<string> *pVertex, Vertex<string> *pVertex1) {
@@ -86,19 +85,33 @@ double TspManager::getEdgeWeight(Graph<std::string> graph, int node, int i) {
 void TspManager::TSPtriangularHeuristic() {
     if (!graph.getVertexSet().empty()) {
         vector<int> bestTour;
-        TSPtriangularHeuristicMethod(bestTour);
+        double totalWeight = 0;
+
+        auto start = chrono::high_resolution_clock::now();
+
+        TSPtriangularHeuristicMethod(bestTour, totalWeight);
+
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double> duration = end - start;
+
+        totalWeight += getEdgeWeight(graph, bestTour.back(), bestTour[0]);
+
         cout << "Best tour: ";
         for (int i = 0; i < bestTour.size(); i++) {
             cout << bestTour[i] << " ";
         }
         cout << bestTour[0];
         cout << endl;
+
+        cout << "Total weight: " << totalWeight << endl;
+        cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << endl;
     } else {
         cout << "Graph is empty" << endl;
     }
 }
 
-void TspManager::TSPtriangularHeuristicMethod(vector<int> &bestTour) {
+void TspManager::TSPtriangularHeuristicMethod(vector<int> &bestTour, double &totalWeight) {
     vector<int> tour;
     vector<bool> visited(graph.getNumVertex(), false);
     int startNode = 0;
@@ -125,6 +138,7 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int> &bestTour) {
         tour.push_back(nextNode);
         visited[nextNode] = true;
         currentNode = nextNode;
+        totalWeight += minDist;
     }
     bestTour = tour;
 }
@@ -151,6 +165,7 @@ void TspManager::TSPprim(bool incompleteGraph) {
     }
     std::vector<Edge<std::string> *> shortestPathEdges;
 
+    auto start = chrono::high_resolution_clock::now();
 
     while (!pq.empty() && visitedVertices.size() < graph.getNumVertex()) {
         Edge<std::string> *minEdge = pq.top();
@@ -164,13 +179,17 @@ void TspManager::TSPprim(bool incompleteGraph) {
             }
         }
     }
+
+    auto end = chrono::high_resolution_clock::now();
+
+    chrono::duration<double> duration = end - start;
+
     int totalWeight = 0;
     for (Edge<std::string> *edge: shortestPathEdges) {
         std::cout << edge->getOrig()->getInfo() << " -> " << edge->getDest()->getInfo() << " (Weight: "
                   << edge->getWeight() << ")" << std::endl;
         totalWeight += edge->getWeight();
     }
-
 
     if (!shortestPathEdges.empty()) {
         Vertex<std::string> *lastVertex = shortestPathEdges.back()->getDest();
@@ -180,7 +199,7 @@ void TspManager::TSPprim(bool incompleteGraph) {
     }
 
     std::cout << "Total weight: " << totalWeight << std::endl;
-
+    std::cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
 }
 
 float TspManager::getLatitude(Vertex<std::string> *vertex) const {
