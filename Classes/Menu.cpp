@@ -278,11 +278,12 @@ void Menu::showMenu() {
                     break;
                 }
                 case '2': {
-                    tspm.TSPtriangularHeuristic();
+                    //tspm.TSPtriangularHeuristic();
+                    tspm.TSPtriangularHeuristicInput();
                     break;
                 }
                 case '3': {
-                    bool flag = (system == "real1" || system == "real2" || system == "real3" || system == "shopping");
+                    bool flag = (system == "real1" || system == "real2" || system == "real3");
                     tspm.TSPprim(flag);
                     break;
                 }

@@ -302,6 +302,7 @@ void TspManager::TSPtriangularHeuristicInput() {
 
         vector<int> bestTour;
         TSPtriangularHeuristicMethod(bestTour, startNode);
+        //triangularHeuristicAproximation2(to_string(startNode));
         cout << "Best tour: ";
         int sum = 0;
         for (int i = 0; i < bestTour.size(); i++) {
@@ -348,4 +349,112 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour, int startNo
     }
     bestTour = tour;
 }
+
+
+
+
+
+std::vector<Vertex<string> *>  TspManager::prim(Graph<std::string> g) {
+    if (g.getVertexSet().empty()) {
+        return g.getVertexSet();
+    }
+    for(auto v : g.getVertexSet()) {
+        v->setDist(INT_MAX);
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+    auto s = g.getVertexSet().front();
+    s->setDist(0);
+    MutablePriorityQueue<Vertex<string>> q;
+    q.insert(s);
+    while( ! q.empty() ) {
+        auto v = q.extractMin();
+        v->setVisited(true);
+        for(auto &e : v->getAdj()) {
+            Vertex<string>* w = e->getDest();
+            if (!w->isVisited()) {
+                auto oldDist = w->getDist();
+                if(e->getWeight() < oldDist) {
+                    w->setDist(e->getWeight());
+
+                    w->setPath(e);
+                    if (oldDist == INT_MAX) {
+                        q.insert(w);
+                    }
+                    else {
+                        q.decreaseKey(w);
+                    }
+                }
+            }
+        }
+    }
+
+    return g.getVertexSet();
+}
+
+void TspManager::dfsMST(Vertex<string>* v, const std::vector<Vertex<string>*>& mst) {
+    v->setVisited(true);
+
+    if (std::find(aproximationtour.begin(), aproximationtour.end(), v) == aproximationtour.end()) {
+        aproximationtour.push_back(reinterpret_cast<Vertex<std::basic_string<char>> *const>(v));
+    }
+
+    for (auto& edge : v->getAdj()) {
+        Vertex<string>* neighbor = edge->getDest();
+        if (!neighbor->isVisited()) {
+            aproximationtourCost += edge->getWeight();
+            dfsMST(neighbor, mst);
+        }
+    }
+}
+
+
+
+void TspManager::triangularHeuristicAproximation2(const string& startNodeId) {
+    aproximationtour.clear();
+    aproximationtourCost = 0.0;
+
+    auto startVertex = graph.findVertex(startNodeId);
+    if (!startVertex) {
+        cerr << "Start node not found in the graph.\n";
+        return;
+    }
+
+    std::vector<Vertex<string>*> mst = prim(graph);
+
+    for(auto v : graph.getVertexSet()) {
+        v->setVisited(false);
+    }
+    Graph<std::string> mstGraph;
+    for(auto v : mst) {
+        mstGraph.addVertex(v->getInfo());
+        auto ep = v->getPath();
+        if (ep != nullptr) {
+            if(!mstGraph.addBidirectionalEdge(ep->getOrig()->getInfo(),ep->getDest()->getInfo(),ep->getWeight())) {
+                mstGraph.addVertex(ep->getOrig()->getInfo());
+                mstGraph.addVertex(ep->getDest()->getInfo());
+                mstGraph.addBidirectionalEdge(ep->getOrig()->getInfo(),ep->getDest()->getInfo(),ep->getWeight());
+            }
+        }
+    }
+    //dfsMST(startVertex, mstGraph.getVertexSet());
+    auto vector1 = mstGraph.dfs();
+    for(auto s: vector1) {
+        aproximationtour.push_back(graph.findVertex(s));
+    }
+    aproximationtour.push_back(startVertex);
+
+    aproximationtourCost = calculateTourCost(aproximationtour);
+    //resetNodesVisitation();
+}
+
+double TspManager::calculateTourCost(std::vector<Vertex<std::string> *> vector1) {
+    double cost = 0;
+    for (int i = 0; i < vector1.size() - 1; i++) {
+        cost += graph.getEdgeWeight(vector1[i]->getInfo(), vector1[i + 1]->getInfo());
+    }
+    cost += graph.getEdgeWeight(vector1.back()->getInfo(), vector1.front()->getInfo());
+    return cost;
+}
+
 
