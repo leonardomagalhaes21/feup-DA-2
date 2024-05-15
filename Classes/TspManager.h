@@ -44,6 +44,8 @@ private:
 
     void TSPtriangularHeuristicMethod(std::vector<int> &vector1, double &totalWeight);
 
+    void TSPprimMethod(const Graph<std::string>& graphTemp, Vertex<std::string> *startVertex, std::vector<Edge<std::string> *> &shortestPathEdges);
+
     void CompleteGraph(Graph<std::string> graphcopy);
 
     float getLatitude(Vertex<std::string> *vertex) const;
@@ -74,8 +76,6 @@ private:
     double calculateTourCost(std::vector<Vertex<std::string> *> vector1);
 
     void dfsMST(Vertex<std::string> *v, const std::vector<Vertex<std::string> *> &mst);
-  
-    void TSPprimMethod(const Graph<std::string>& graphTemp, Vertex<std::string> *startVertex, std::vector<Edge<std::string> *> &shortestPathEdges);
 
     Graph<std::string> copyGraph(const Graph<std::string>& originalGraph);
 };
