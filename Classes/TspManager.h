@@ -31,7 +31,7 @@ private:
     std::unordered_map<int, std::pair<float, float>> nodesloc;
     std::unordered_map<int, std::string> labels;
 
-    void TSPbacktrackingMethod(std::vector<int> &bestTour);
+    void TSPbacktrackingMethod(std::vector<int> &bestTour, double &minTourCost);
 
     void TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
 

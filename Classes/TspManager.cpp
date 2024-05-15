@@ -17,23 +17,26 @@ TspManager::TspManager(const Data &d) {
 void TspManager::TSPbacktracking() {
     if (!graph.getVertexSet().empty()) {
         std::vector<int> bestTour;
-        TSPbacktrackingMethod(bestTour);
+        double totalWeight = INT_MAX;
+        auto start = chrono::high_resolution_clock::now();
+        TSPbacktrackingMethod(bestTour, totalWeight);
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double> duration = end - start;
+
         std::cout << "Best tour: ";
-        int sum=0;
-        for (int i = 0; i < bestTour.size(); i++) {
-            std::cout << bestTour[i] << " ";
-            if (i > 0) {
-                sum += getEdgeWeight(graph, bestTour[i-1], bestTour[i]);
-            }
+        for (int i : bestTour) {
+            std::cout << i << " ";
         }
-        std::cout << std::endl << "Total Distance: " << sum << std::endl;
+        cout << endl << "Total weight: " << totalWeight << endl;
+        cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << endl;
+
     } else {
         std::cout << "Graph is empty" << std::endl;
     }
 }
 
-void TspManager::TSPbacktrackingMethod(std::vector<int>& bestTour) {
-    double minTourCost = INT_MAX;
+void TspManager::TSPbacktrackingMethod(std::vector<int>& bestTour, double &minTourCost) {
     int startNode = 0;
     std::vector<int> tour = { startNode };
     std::vector<bool> visited(graph.getNumVertex(), false);
