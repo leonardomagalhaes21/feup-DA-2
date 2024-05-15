@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <climits>
 #include <iomanip>
+#include <chrono>
 
 class TspManager {
 public :
@@ -20,8 +21,9 @@ public :
 
     void TSPprim(bool incompleteGraph);
 
-
     void printNetworkInfo(const std::string &system);
+
+    void TSPtriangularHeuristicInput();
 
 
 private:
@@ -29,17 +31,15 @@ private:
     std::unordered_map<int, std::pair<float, float>> nodesloc;
     std::unordered_map<int, std::string> labels;
 
-    void TSPbacktrackingMethod(std::vector<int> &bestTour);
+    void TSPbacktrackingMethod(std::vector<int> &bestTour, double &minTourCost);
 
-
-    void
-    TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
+    void TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
 
     bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
 
-    double getEdgeWeight(Graph<std::string> graph, int node, int i);
+    double getEdgeWeight(Graph<std::string>& graph, int node, int i);
 
-    void TSPtriangularHeuristicMethod(std::vector<int> &vector1);
+    void TSPtriangularHeuristicMethod(std::vector<int> &vector1, double &totalWeight);
 
     void CompleteGraph(Graph<std::string> graphcopy);
 
@@ -47,8 +47,9 @@ private:
 
     float getLongitude(Vertex<std::string> *vertex) const;
 
-
     double haversineDistance(double lat1, double lon1, double lat2, double lon2);
+
+    void TSPtriangularHeuristicMethod(std::vector<int> &bestTour, int startNode);
 };
 
 

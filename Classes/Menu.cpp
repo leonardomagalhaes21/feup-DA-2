@@ -30,6 +30,7 @@ void Menu::showMenu() {
         cout << "| 1. Real World Graphs                             |" << endl;
         cout << "| 2. Toy-Graphs                                    |" << endl;
         cout << "| 3. Extra-Fully-Connected Graphs                  |" << endl;
+        cout << "| Q. Exit                                          |" << endl;
         drawBottom();
         cout << "Choose an option: ";
         cin >> key;
@@ -39,6 +40,7 @@ void Menu::showMenu() {
                 cout << "| 1. Real-Graph 1                                  |" << endl;
                 cout << "| 2. Real-Graph 2                                  |" << endl;
                 cout << "| 3. Real-Graph 3                                  |" << endl;
+                cout << "| Q. Exit                                          |" << endl;
                 drawBottom();
                 cout << "Choose an option: ";
                 cin >> key;
@@ -70,6 +72,11 @@ void Menu::showMenu() {
                         subMenu = true;
                         break;
                     }
+                    case 'Q' : {
+                        mainMenu = false;
+                        subMenu = false;
+                        break;
+                    }
                 }
                 break;
             }
@@ -78,6 +85,7 @@ void Menu::showMenu() {
                 cout << "| 1. Load shipping.csv (Not fully connected graph) |" << endl;
                 cout << "| 2. Load stadiums.csv                             |" << endl;
                 cout << "| 3. Load tourism.csv                              |" << endl;
+                cout << "| Q. Exit                                          |" << endl;
                 drawBottom();
                 cout << "Choose an option: ";
                 cin >> key;
@@ -109,6 +117,11 @@ void Menu::showMenu() {
                         subMenu = true;
                         break;
                     }
+                    case 'Q' : {
+                        mainMenu = false;
+                        subMenu = false;
+                        break;
+                    }
                 }
                 break;
             }
@@ -125,6 +138,7 @@ void Menu::showMenu() {
                 cout << "| 9. Load Graph with 700 nodes                     |" << endl;
                 cout << "| A. Load Graph with 800 nodes                     |" << endl;
                 cout << "| B. Load Graph with 900 nodes                     |" << endl;
+                cout << "| Q. Exit                                          |" << endl;
                 drawBottom();
                 cout << "Choose an option: ";
                 cin >> key;
@@ -228,7 +242,17 @@ void Menu::showMenu() {
                         subMenu = true;
                         break;
                     }
+                    case 'Q' : {
+                        mainMenu = false;
+                        subMenu = false;
+                        break;
+                    }
                 }
+                break;
+            }
+            case 'Q' : {
+                mainMenu = false;
+                subMenu = false;
                 break;
             }
             default: {
