@@ -266,8 +266,10 @@ void Menu::showMenu() {
             cout << "| 1. Backtracking Algorithm                        |" << endl;
             cout << "| 2. Triangular Heuristic Approximation            |" << endl;
             cout << "| 3. Prim's Algorithm                              |" << endl;
+
             cout << "| 4. TSP in the Real World                         |" << endl;
             cout << "| 5. Print Network Details                         |" << endl;
+
             cout << "| 6. Change Dataset                                |" << endl;
             cout << "| Q. Exit                                          |" << endl;
             drawBottom();
@@ -279,8 +281,10 @@ void Menu::showMenu() {
                     break;
                 }
                 case '2': {
-                    //tspm.TSPtriangularHeuristic();
-                    tspm.TSPtriangularHeuristicInput();
+                    if (system != "shipping")
+                        tspm.TSPtriangularHeuristicInput();                   
+                    else
+                        cout << "This option is not available for this dataset." << endl;                    
                     break;
                 }
                 case '3': {
@@ -298,6 +302,13 @@ void Menu::showMenu() {
 
                     break;
                 }
+
+                case '5': {
+                    bool flag = (system == "real1" || system == "real2" || system == "real3");
+                    tspm.compareAlgorithmsPerformance(flag);
+                    break;
+                }
+
                 case '6': {
                     mainMenu = true;
                     subMenu = false;
