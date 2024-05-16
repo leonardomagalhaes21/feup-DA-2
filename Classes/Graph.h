@@ -188,7 +188,7 @@ public:
 
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
-    std::unordered_map<std::string, Vertex<T> *> vertexMap;
+    std::unordered_map<int, Vertex<T> *> vertexMap;
 
     double **distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall

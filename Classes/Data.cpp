@@ -64,7 +64,15 @@ const std::unordered_map<int, std::pair<float, float>> &Data::getNodes() const {
     return this->nodesloc;
 }
 
-const Graph<std::string> &Data::getGraph() const {
+const unordered_map<int, std::pair<float, float>> Data::getNodesLoc() const {
+    return nodesloc;
+}
+
+const unordered_map<int, std::string> Data::getLabels() const {
+    return labels;
+}
+
+const Graph<int> &Data::getGraph() const {
     return this->graph;
 }
 
@@ -82,22 +90,24 @@ void Data::readToyGraphsTourism(const std::string &filename) {
     while (getline(file, line)) {
         stringstream linestream(line);
         string temp;
-        string vertex1, vertex2, label_origem, label_destino;
+        string vertex1_str, vertex2_str, label_origem, label_destino;
         float distance;
 
-        getline(linestream, vertex1, ',');
-        getline(linestream, vertex2, ',');
+        getline(linestream, vertex1_str, ',');
+        getline(linestream, vertex2_str, ',');
         getline(linestream, temp, ',');
         distance = stof(temp);
         getline(linestream, label_origem, ',');
         getline(linestream, label_destino, ',');
+        int vertex1 = stoi(vertex1_str);
+        int vertex2 = stoi(vertex2_str);
 
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
         graph.addEdge(vertex1, vertex2, distance);
         graph.addEdge(vertex2, vertex1, distance);
-        labels.insert(std::make_pair(stoi(vertex1), label_origem));
-        labels.insert(std::make_pair(stoi(vertex2), label_destino));
+        labels.insert(std::make_pair(vertex1, label_origem));
+        labels.insert(std::make_pair(vertex2, label_destino));
     }
 }
 
@@ -115,14 +125,15 @@ void Data::readExtraGraphs(const std::string &filename) {
     while (getline(file, line)) {
         stringstream linestream(line);
         string temp;
-        string vertex1, vertex2;
+        string vertex1_str, vertex2_str;
         float distance;
 
-        getline(linestream, vertex1, ',');
-        getline(linestream, vertex2, ',');
+        getline(linestream, vertex1_str, ',');
+        getline(linestream, vertex2_str, ',');
         getline(linestream, temp, ',');
         distance = stof(temp);
-
+        int vertex1 = stoi(vertex1_str);
+        int vertex2 = stoi(vertex2_str);
         graph.addEdge(vertex1, vertex2, distance);
         graph.addEdge(vertex2, vertex1, distance);
     }
@@ -152,10 +163,10 @@ void Data::readToyGraphs(const std::string &filename) {
         getline(linestream, temp, ',');
         distance = stof(temp);
 
-        graph.addVertex(to_string(vertex1));
-        graph.addVertex(to_string(vertex2));
-        graph.addEdge(to_string(vertex1), to_string(vertex2), distance);
-        graph.addEdge(to_string(vertex2), to_string(vertex1), distance);
+        graph.addVertex(vertex1);
+        graph.addVertex(vertex2);
+        graph.addEdge(vertex1, vertex2, distance);
+        graph.addEdge(vertex2, vertex1, distance);
     }
 
 }
@@ -184,8 +195,8 @@ void Data::readGraphs(const std::string &filename) {
         getline(linestream, temp, ',');
         distance = stof(temp);
 
-        graph.addEdge(to_string(vertex1), to_string(vertex2), distance);
-        graph.addEdge(to_string(vertex2), to_string(vertex1), distance);
+        graph.addEdge(vertex1, vertex2, distance);
+        graph.addEdge(vertex2, vertex1, distance);
     }
 }
 
@@ -213,7 +224,7 @@ void Data::readNodes(const std::string &filename) {
         getline(linestream, temp, ',');
         value2 = stof(temp);
 
-        graph.addVertex(to_string(id));
+        graph.addVertex(id);
         nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
     }
 
@@ -243,18 +254,12 @@ void Data::readNodesExtra(const std::string &filename, int limit) {
         getline(linestream, temp, ',');
         value2 = stof(temp);
 
-        graph.addVertex(to_string(id));
+        graph.addVertex(id);
         nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
         limit--;
     }
 }
 
-const unordered_map<int, std::pair<float, float>> Data::getNodesLoc() const {
-    return nodesloc;
-}
 
-const unordered_map<int, std::string> Data::getLabels() const {
-    return labels;
-}
 
 
