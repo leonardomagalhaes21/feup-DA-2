@@ -12,7 +12,7 @@ public:
 
     const std::unordered_map<int, std::pair<float, float>> &getNodes() const;
 
-    const Graph<std::string> &getGraph() const;
+    const Graph<int> &getGraph() const;
 
 
     void readExtraGraphs(const std::string &filename);
@@ -34,9 +34,10 @@ public:
 
 
 private:
-    Graph<std::string> graph;
+    Graph<int> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
     std::unordered_map<int, std::string> labels;
+
 
 
 };

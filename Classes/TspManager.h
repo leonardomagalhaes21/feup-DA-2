@@ -8,6 +8,7 @@
 #include <climits>
 #include <iomanip>
 #include <chrono>
+#include <unordered_set>
 #include "MutablePriorityQueue.h"
 
 class TspManager {
@@ -26,9 +27,23 @@ public :
 
     void TSPtriangularHeuristicInput();
 
+    std::vector<Vertex<int>*> getAproximationTour() {
+        return aproximationtour;
+    }
+
+    double getAproximationTourCost() {
+        return aproximationtourCost;
+    }
+    std::vector<Vertex<int>*> aproximationtour;
+    double aproximationtourCost;
+
+
+    void TSPRealWorldInput();
+
+    void TSPRealWorldInput1();
 
 private:
-    Graph<std::string> graph;
+    Graph<int> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
     std::unordered_map<int, std::string> labels;
 
@@ -36,17 +51,17 @@ private:
 
     void TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
 
-    bool hasEdge(Vertex<std::string> *pVertex, Vertex<std::string> *pVertex1);
+    bool hasEdge(Vertex<int> *pVertex, Vertex<int> *pVertex1);
 
-    double getEdgeWeight(Graph<std::string>& graph, int node, int i);
+    double getEdgeWeight(Graph<int>& graph, int node, int i);
 
     void TSPtriangularHeuristicMethod(std::vector<int> &vector1, double &totalWeight);
 
-    void CompleteGraph(Graph<std::string> graphcopy);
+    void CompleteGraph(Graph<int> graphcopy);
 
-    float getLatitude(Vertex<std::string> *vertex) const;
+    float getLatitude(Vertex<int> *vertex) const;
 
-    float getLongitude(Vertex<std::string> *vertex) const;
+    float getLongitude(Vertex<int> *vertex) const;
 
     double haversineDistance(double lat1, double lon1, double lat2, double lon2);
 
@@ -55,26 +70,24 @@ private:
 
 
 
+    void dfsMST(Vertex<int> *v, const std::vector<Vertex<int> *> &mst);
 
-    void triangularHeuristicAproximation2(const std::string &startNodeId);
+
+    void triangularHeuristicAproximation22(const int startNodeId);
+
+    double calculateTourCost(std::vector<Vertex<int> *> vector1);
+
+    void dfsMST1(Vertex<int> *v, const std::vector<Vertex<int> *> &mst);
 
 
-    std::vector<Vertex<std::string> *> prim(Graph<std::string> g);
 
-    std::vector<Vertex<std::string>*> getAproximationTour() {
-        return aproximationtour;
-    }
+    void runModifiedDFS(int startVertex);
 
-    double getAproximationTourCost() {
-        return aproximationtourCost;
-    }
+    void
+    dfsTSP(int vertex, std::unordered_set<int> &visited, std::vector<int> &tour, std::vector<int> &bestTour, double &minCost,
+           double currentCost);
 
-    std::vector<Vertex<std::string>*> aproximationtour;
-    double aproximationtourCost;
-
-    double calculateTourCost(std::vector<Vertex<std::string> *> vector1);
-
-    void dfsMST(Vertex<std::string> *v, const std::vector<Vertex<std::string> *> &mst);
+    void printTourCostModified(const std::vector<int> &tour);
 };
 
 
