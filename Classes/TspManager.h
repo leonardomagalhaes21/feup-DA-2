@@ -42,6 +42,8 @@ public :
 
     void TSPRealWorldInput1();
 
+    void compareAlgorithmsPerformance(bool incompleteGraph);
+
 private:
     Graph<int> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
@@ -88,6 +90,11 @@ private:
            double currentCost);
 
     void printTourCostModified(const std::vector<int> &tour);
+
+    Graph<int> copyGraph(const Graph<int> &originalGraph);
+
+    void
+    TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVertex, std::vector<Edge<int> *> &shortestPathEdges);
 };
 
 
