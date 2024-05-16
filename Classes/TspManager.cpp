@@ -660,6 +660,87 @@ void TspManager::printTourCostModified(const vector<int>& tour) {
     cout << "Total cost: " << totalCost << endl;
 }
 
+void TspManager::compareAlgorithmsPerformance(bool incompleteGraph) {
+    std::vector<int> bestTour;
+    double totalWeight = INT_MAX;
 
+    auto start = chrono::high_resolution_clock::now();
+    TSPbacktrackingMethod(bestTour, totalWeight);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start;
+    std::cout << "Total weight: " << totalWeight << std::endl;
+    std::cout << "Time taken by backtracking algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+    cout << "----------------//----------------" << endl;
+
+    bestTour = {};
+    totalWeight = 0;
+    start = chrono::high_resolution_clock::now();
+    TSPtriangularHeuristicMethod(bestTour, totalWeight);
+    end = chrono::high_resolution_clock::now();
+    duration = end - start;
+    totalWeight += getEdgeWeight(graph, bestTour.back(), bestTour[0]);
+    std::cout << "Total weight: " << totalWeight << std::endl;
+    std::cout << "Time taken by triangular heuristic algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+    cout << "----------------//----------------" << endl;
+
+    totalWeight = 0;
+    Graph<int> graphTemp = copyGraph(graph);
+    if (incompleteGraph)
+        CompleteGraph(graphTemp);
+    std::vector<Edge<int> *> shortestPathEdges;
+    start = chrono::high_resolution_clock::now();
+    TSPprimMethod(graphTemp, graphTemp.getVertexSet()[0], shortestPathEdges);
+    end = chrono::high_resolution_clock::now();
+    for (Edge<int> *edge: shortestPathEdges) {
+        totalWeight += edge->getWeight();
+    }
+    if (!shortestPathEdges.empty()) {
+        Vertex<int> *lastVertex = shortestPathEdges.back()->getDest();
+        totalWeight += graphTemp.getEdgeWeight(lastVertex->getInfo(), graphTemp.getVertexSet()[0]->getInfo());
+    }
+    duration = end - start;
+    std::cout << "Total weight: " << totalWeight << std::endl;
+    std::cout << "Time taken by prim algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+}
+
+Graph<int> TspManager::copyGraph(const Graph<int>& originalGraph) {
+    Graph<int> copiedGraph;
+
+    for (auto v : originalGraph.getVertexSet()) {
+        copiedGraph.addVertex(v->getInfo());
+    }
+
+    for (auto v : originalGraph.getVertexSet()) {
+        for (auto e : v->getAdj()) {
+            copiedGraph.addEdge(v->getInfo(), e->getDest()->getInfo(), e->getWeight());
+        }
+    }
+
+    return copiedGraph;
+}
+
+void TspManager::TSPprimMethod(const Graph<int>& graphTemp, Vertex<int> *startVertex, std::vector<Edge<int> *> &shortestPathEdges) {
+    if (graphTemp.getNumVertex() == 0) return;
+
+    std::unordered_set<Vertex<int> *> visitedVertices;
+    std::priority_queue<Edge<int> *, std::vector<Edge<int> *>, CompareEdgeWeights<int>> pq;
+    visitedVertices.insert(startVertex);
+    for (Edge<int> *edge: startVertex->getAdj()) {
+        pq.push(edge);
+    }
+
+    while (!pq.empty() && visitedVertices.size() < graphTemp.getNumVertex()) {
+        Edge<int> *minEdge = pq.top();
+        pq.pop();
+        Vertex<int> *destVertex = minEdge->getDest();
+        if (visitedVertices.find(destVertex) == visitedVertices.end()) {
+            visitedVertices.insert(destVertex);
+            shortestPathEdges.push_back(minEdge);
+            for (Edge<int> *edge: destVertex->getAdj()) {
+                pq.push(edge);
+            }
+        }
+    }
+}
 
 

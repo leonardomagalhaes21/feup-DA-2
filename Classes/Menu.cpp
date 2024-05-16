@@ -266,11 +266,10 @@ void Menu::showMenu() {
             cout << "| 1. Backtracking Algorithm                        |" << endl;
             cout << "| 2. Triangular Heuristic Approximation            |" << endl;
             cout << "| 3. Prim's Algorithm                              |" << endl;
-
             cout << "| 4. TSP in the Real World                         |" << endl;
             cout << "| 5. Print Network Details                         |" << endl;
-
-            cout << "| 6. Change Dataset                                |" << endl;
+            cout << "| 6. Comparative Analysis                          |" << endl;
+            cout << "| 7. Change Dataset                                |" << endl;
             cout << "| Q. Exit                                          |" << endl;
             drawBottom();
             cout << "Choose an option: ";
@@ -303,13 +302,13 @@ void Menu::showMenu() {
                     break;
                 }
 
-                case '5': {
+                case '6': {
                     bool flag = (system == "real1" || system == "real2" || system == "real3");
                     tspm.compareAlgorithmsPerformance(flag);
                     break;
                 }
 
-                case '6': {
+                case '7': {
                     mainMenu = true;
                     subMenu = false;
                     break;
