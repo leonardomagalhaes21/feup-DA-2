@@ -44,6 +44,8 @@ public :
 
     void compareAlgorithmsPerformance(bool incompleteGraph);
 
+    void TSPRealWorldInputReal();
+
 private:
     Graph<int> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
@@ -95,6 +97,7 @@ private:
 
     void
     TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVertex, std::vector<Edge<int> *> &shortestPathEdges);
+
 };
 
 

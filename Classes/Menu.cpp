@@ -281,7 +281,9 @@ void Menu::showMenu() {
                 }
                 case '2': {
                     if (system != "shipping")
-                        tspm.TSPtriangularHeuristicInput();                   
+                        //tspm.TSPtriangularHeuristicInput();
+                        //tspm.TSPRealWorldInput1();
+                        tspm.TSPRealWorldInputReal();
                     else
                         cout << "This option is not available for this dataset." << endl;                    
                     break;
@@ -293,7 +295,9 @@ void Menu::showMenu() {
                 }
                 case '4': {
                    /* tspm.TSPRealWorldInput();*/
-                    tspm.TSPRealWorldInput1();
+                    tspm.TSPtriangularHeuristicInput();
+
+                    //tspm.TSPRealWorldInput1();
                     break;
                 }
                 case '5': {
