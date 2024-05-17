@@ -16,7 +16,7 @@ TspManager::TspManager(const Data &d) {
 
 void TspManager::TSPbacktracking() {
     if (!graph.getVertexSet().empty()) {
-        std::vector<int> bestTour;
+        vector<int> bestTour;
         double totalWeight = INT_MAX;
         auto start = chrono::high_resolution_clock::now();
         TSPbacktrackingMethod(bestTour, totalWeight);
@@ -24,27 +24,27 @@ void TspManager::TSPbacktracking() {
 
         chrono::duration<double> duration = end - start;
 
-        std::cout << "Best tour: ";
+        cout << "Best tour: ";
         for (int i : bestTour) {
-            std::cout << i << " ";
+            cout << i << " ";
         }
         cout << endl << "Total weight: " << totalWeight << endl;
         cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << endl;
 
     } else {
-        std::cout << "Graph is empty" << std::endl;
+        cout << "Graph is empty" << endl;
     }
 }
 
-void TspManager::TSPbacktrackingMethod(std::vector<int>& bestTour, double &minTourCost) {
+void TspManager::TSPbacktrackingMethod(vector<int>& bestTour, double &minTourCost) {
     int startNode = 0;
-    std::vector<int> tour = { startNode };
-    std::vector<bool> visited(graph.getNumVertex(), false);
+    vector<int> tour = { startNode };
+    vector<bool> visited(graph.getNumVertex(), false);
     visited[startNode] = true;
     TSPRec(tour, visited, 0.0, minTourCost, bestTour);
 }
 
-void TspManager::TSPRec(std::vector<int>& tour, std::vector<bool>& visited, double currentCost, double& minCost, std::vector<int>& bestTour) {
+void TspManager::TSPRec(vector<int>& tour, vector<bool>& visited, double currentCost, double& minCost, vector<int>& bestTour) {
     int numVertices = graph.getNumVertex();
 
     if (tour.size() == numVertices) {
@@ -167,13 +167,13 @@ void TspManager::TSPprim(bool incompleteGraph) {
     if (graph.getNumVertex() == 0) return;
     Vertex<int> *startVertex = graph.getVertexSet()[0];
 
-    std::unordered_set<Vertex<int> *> visitedVertices;
-    std::priority_queue<Edge<int> *, std::vector<Edge<int> *>, CompareEdgeWeights<int>> pq;
+    unordered_set<Vertex<int> *> visitedVertices;
+    priority_queue<Edge<int> *, vector<Edge<int> *>, CompareEdgeWeights<int>> pq;
     visitedVertices.insert(startVertex);
     for (Edge<int> *edge: startVertex->getAdj()) {
         pq.push(edge);
     }
-    std::vector<Edge<int> *> shortestPathEdges;
+    vector<Edge<int> *> shortestPathEdges;
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -196,20 +196,20 @@ void TspManager::TSPprim(bool incompleteGraph) {
 
     int totalWeight = 0;
     for (Edge<int> *edge: shortestPathEdges) {
-        std::cout << edge->getOrig()->getInfo() << " -> " << edge->getDest()->getInfo() << " (Weight: "
-                  << edge->getWeight() << ")" << std::endl;
+        cout << edge->getOrig()->getInfo() << " -> " << edge->getDest()->getInfo() << " (Weight: "
+                  << edge->getWeight() << ")" << endl;
         totalWeight += edge->getWeight();
     }
 
     if (!shortestPathEdges.empty()) {
         Vertex<int> *lastVertex = shortestPathEdges.back()->getDest();
-        std::cout << lastVertex->getInfo() << " -> " << startVertex->getInfo() << " (Weight: "
-                  << graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo()) << ")" << std::endl;
+        cout << lastVertex->getInfo() << " -> " << startVertex->getInfo() << " (Weight: "
+                  << graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo()) << ")" << endl;
         totalWeight += graph.getEdgeWeight(lastVertex->getInfo(), startVertex->getInfo());
     }
 
-    std::cout << "Total weight: " << totalWeight << std::endl;
-    std::cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << std::endl;
+    cout << "Total weight: " << totalWeight << endl;
+    cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << endl;
 }
 
 float TspManager::getLatitude(Vertex<int> *vertex) const {
@@ -377,14 +377,14 @@ void TspManager::TSPRealWorldInputReal() {
         }
 
         sum += getEdgeWeight(graph, aproximationtour.back()->getInfo(), aproximationtour[0]->getInfo());
-        std::cout << aproximationtour[0]->getInfo() << std::endl;
-        std::cout << "Total distance: " << sum << std::endl;
+        cout << aproximationtour[0]->getInfo() << std::endl;
+        cout << "Total distance: " << fixed << setprecision(2) << sum << endl;
     }
 }
 
 
 
-std::vector<Vertex<int> *> prim(Graph<int> * g) {
+vector<Vertex<int> *> prim(Graph<int> * g) {
     if (g->getVertexSet().empty()) {
         return g->getVertexSet();
     }
@@ -425,7 +425,7 @@ std::vector<Vertex<int> *> prim(Graph<int> * g) {
 void TspManager::dfsMST(Vertex<int>* v, const vector<Vertex<int>*>& mst) {
     v->setVisited(true);
 
-    if (std::find(aproximationtour.begin(), aproximationtour.end(), v) == aproximationtour.end()) {
+    if (find(aproximationtour.begin(), aproximationtour.end(), v) == aproximationtour.end()) {
         aproximationtour.push_back(v);
     }
 
@@ -450,7 +450,7 @@ void TspManager::triangularHeuristicAproximation22(const int startNodeId) {
         return;
     }
 
-    std::vector<Vertex<int>*> mst = prim(&graph);
+    vector<Vertex<int>*> mst = prim(&graph);
 
     for(auto v : graph.getVertexSet()) {
         v->setVisited(false);
@@ -719,11 +719,11 @@ Graph<int> TspManager::copyGraph(const Graph<int>& originalGraph) {
     return copiedGraph;
 }
 
-void TspManager::TSPprimMethod(const Graph<int>& graphTemp, Vertex<int> *startVertex, std::vector<Edge<int> *> &shortestPathEdges) {
+void TspManager::TSPprimMethod(const Graph<int>& graphTemp, Vertex<int> *startVertex, vector<Edge<int> *> &shortestPathEdges) {
     if (graphTemp.getNumVertex() == 0) return;
 
-    std::unordered_set<Vertex<int> *> visitedVertices;
-    std::priority_queue<Edge<int> *, std::vector<Edge<int> *>, CompareEdgeWeights<int>> pq;
+    unordered_set<Vertex<int> *> visitedVertices;
+    priority_queue<Edge<int> *, vector<Edge<int> *>, CompareEdgeWeights<int>> pq;
     visitedVertices.insert(startVertex);
     for (Edge<int> *edge: startVertex->getAdj()) {
         pq.push(edge);
