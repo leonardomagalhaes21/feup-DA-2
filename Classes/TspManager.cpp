@@ -355,7 +355,7 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour, int startNo
 
 //TESTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIING
 
-/*void TspManager::TSPRealWorldInput() {
+void TspManager::TSPRealWorldInputReal() {
     if (!graph.getVertexSet().empty()) {
         int startNode;
         std::cout << "Enter the starting node: ";
@@ -380,7 +380,7 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int>& bestTour, int startNo
         std::cout << aproximationtour[0]->getInfo() << std::endl;
         std::cout << "Total distance: " << sum << std::endl;
     }
-}*/
+}
 
 
 
