@@ -280,8 +280,7 @@ void Menu::showMenu() {
                     break;
                 }
                 case '2': {
-                    if (system != "shipping" || system != "real2" || system != "real3") {
-                        tspm.TSPRealWorldInputReal(); // METODO DO ANTERITO
+                    if (system != "shipping" && system != "real2" && system != "real3") {
                         tspm.TSPtriangularHeuristicInput(); // NOSSO METODO
                     }
                     else
@@ -289,12 +288,12 @@ void Menu::showMenu() {
                     break;
                 }
                 case '3': {
-                    bool flag = (system == "real1" || system == "real2" || system == "real3");
+                    bool flag = (system == "shipping" || system == "real2" || system == "real3");
                     tspm.TSPprim(flag);
                     break;
                 }
                 case '4': {
-
+                    tspm.dfsRealWorld();
                     break;
                 }
                 case '5': {
@@ -304,7 +303,7 @@ void Menu::showMenu() {
                 }
 
                 case '6': {
-                    bool flag = (system == "real1" || system == "real2" || system == "real3");
+                    bool flag = (system == "shipping" || system == "real2" || system == "real3");
                     tspm.compareAlgorithmsPerformance(flag);
                     break;
                 }
