@@ -171,6 +171,10 @@ public:
 
     double TSP_Backtracking() const;
 
+    std::vector<Edge<T>*> findMST_DFS(const T &source) const;
+
+    void dfsVisitMST(Vertex<T> *v, std::vector<Edge<T>*> &mstEdges) const;
+
 
     double getEdgeWeight(const T &source, const T &destination) const {
         Vertex<T> *v = findVertex(source);
@@ -749,6 +753,31 @@ std::vector<T> Graph<T>::topsort() const {
     }
 
     return res;
+}
+
+template<class T>
+std::vector<Edge<T>*> Graph<T>::findMST_DFS(const T &source) const {
+    std::vector<Edge<T>*> mstEdges;
+    auto start = findVertex(source);
+    if (!start) return mstEdges;
+
+    for (auto v : vertexSet) v->setVisited(false);
+
+    dfsVisitMST(start, mstEdges);
+
+    return mstEdges;
+}
+
+template<class T>
+void Graph<T>::dfsVisitMST(Vertex<T> *v, std::vector<Edge<T>*> &mstEdges) const {
+    v->setVisited(true);
+    for (auto &e : v->getAdj()) {
+        auto w = e->getDest();
+        if (!w->isVisited()) {
+            mstEdges.push_back(e);
+            dfsVisitMST(w, mstEdges);
+        }
+    }
 }
 
 inline void deleteMatrix(int **m, int n) {

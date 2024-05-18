@@ -93,67 +93,6 @@ double TspManager::getEdgeWeight(Graph<int> &graph, int node, int i) {
     return 0;
 }
 
-void TspManager::TSPtriangularHeuristic() {
-    if (!graph.getVertexSet().empty()) {
-        vector<int> bestTour;
-        double totalWeight = 0;
-
-        auto start = chrono::high_resolution_clock::now();
-
-        TSPtriangularHeuristicMethod(bestTour, totalWeight);
-
-        auto end = chrono::high_resolution_clock::now();
-
-        chrono::duration<double> duration = end - start;
-
-        totalWeight += getEdgeWeight(graph, bestTour.back(), bestTour[0]);
-
-        cout << "Best tour: ";
-        for (int i = 0; i < bestTour.size(); i++) {
-            cout << bestTour[i] << " ";
-        }
-        cout << bestTour[0];
-        cout << endl;
-
-        cout << "Total weight: " << totalWeight << endl;
-        cout << "Time taken by algorithm: " << to_string(duration.count()) << " seconds" << endl;
-    } else {
-        cout << "Graph is empty" << endl;
-    }
-}
-
-void TspManager::TSPtriangularHeuristicMethod(vector<int> &bestTour, double &totalWeight) {
-    vector<int> tour;
-    vector<bool> visited(graph.getNumVertex(), false);
-    int startNode = 0;
-    tour.push_back(startNode);
-    visited[startNode] = true;
-    int currentNode = startNode;
-    while (tour.size() < graph.getNumVertex()) {
-        double minDist = numeric_limits<double>::max();
-        int nextNode = -1;
-        for (int i = 0; i < graph.getNumVertex(); i++) {
-            if (!visited[i]) {
-                auto nextNodev = graph.findVertex(i);
-                auto currentNodev = graph.findVertex(currentNode);
-                double dist = graph.getEdgeWeight(currentNodev->getInfo(), nextNodev->getInfo());
-                if (dist < minDist) {
-                    minDist = dist;
-                    nextNode = i;
-                }
-            }
-        }
-        if (nextNode == -1) {
-            break;
-        }
-        tour.push_back(nextNode);
-        visited[nextNode] = true;
-        currentNode = nextNode;
-        totalWeight += minDist;
-    }
-    bestTour = tour;
-}
-
 template<class T>
 struct CompareEdgeWeights {
     bool operator()(const Edge<T> *e1, const Edge<T> *e2) const {
@@ -354,36 +293,6 @@ void TspManager::TSPtriangularHeuristicMethod(vector<int> &bestTour, int startNo
 
 
 
-//TESTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIING
-
-void TspManager::TSPRealWorldInputReal() {
-    if (!graph.getVertexSet().empty()) {
-        int startNode;
-        cout << "Enter the starting node: ";
-        cin >> startNode;
-
-        if (startNode < 0 || startNode >= graph.getNumVertex()) {
-            cout << "Invalid starting node!" << endl;
-            return;
-        }
-        triangularHeuristicAproximation22(startNode);
-
-        cout << "Best tour: ";
-        double sum = 0.0;
-        for (size_t i = 0; i < aproximationtour.size(); i++) {
-            cout << aproximationtour[i]->getInfo() << " ";
-            if (i > 0) {
-                sum += getEdgeWeight(graph, aproximationtour[i - 1]->getInfo(), aproximationtour[i]->getInfo());
-            }
-        }
-
-        sum += getEdgeWeight(graph, aproximationtour.back()->getInfo(), aproximationtour[0]->getInfo());
-        cout << aproximationtour[0]->getInfo() << endl;
-        cout << "Total distance: " << fixed << setprecision(2) << sum << endl;
-    }
-}
-
-
 vector<Vertex<int> *> prim(Graph<int> *g) {
     if (g->getVertexSet().empty()) {
         return g->getVertexSet();
@@ -424,160 +333,28 @@ vector<Vertex<int> *> prim(Graph<int> *g) {
 void TspManager::dfsMST(Vertex<int> *v, const vector<Vertex<int> *> &mst) {
     v->setVisited(true);
 
-    if (find(aproximationtour.begin(), aproximationtour.end(), v) == aproximationtour.end()) {
-        aproximationtour.push_back(v);
+    if (find(aproximationTour.begin(), aproximationTour.end(), v) == aproximationTour.end()) {
+        aproximationTour.push_back(v);
     }
 
     for (auto &edge: v->getAdj()) {
         Vertex<int> *neighbor = edge->getDest();
         if (!neighbor->isVisited()) {
-            aproximationtourCost += edge->getWeight();
+            aproximationTourCost += edge->getWeight();
             dfsMST(neighbor, mst);
         }
     }
 }
 
 
-void TspManager::triangularHeuristicAproximation22(const int startNodeId) {
-    aproximationtour.clear();
-    aproximationtourCost = 0.0;
-
-    Vertex<int> *startVertex = graph.findVertex(startNodeId);
-    if (!startVertex) {
-        cerr << "Start node not found in the graph.\n";
-        return;
-    }
-
-    vector<Vertex<int> *> mst = prim(&graph);
-
-    for (auto v: graph.getVertexSet()) {
-        v->setVisited(false);
-    }
-    Graph<int> mstGraph;
-    for (auto v: mst) {
-        mstGraph.addVertex(v->getInfo());
-        auto ep = v->getPath();
-        if (ep != nullptr) {
-            if (!mstGraph.addBidirectionalEdge(ep->getOrig()->getInfo(), ep->getDest()->getInfo(), ep->getWeight())) {
-                mstGraph.addVertex(ep->getOrig()->getInfo());
-                mstGraph.addVertex(ep->getDest()->getInfo());
-                mstGraph.addBidirectionalEdge(ep->getOrig()->getInfo(), ep->getDest()->getInfo(), ep->getWeight());
-            }
-        }
-    }
-    //dfsMST(startVertex, mstGraph.getVertexSet());
-    auto vector1 = mstGraph.dfs();
-    for (auto s: vector1) {
-        aproximationtour.push_back(graph.findVertex(s));
-    }
-    aproximationtour.push_back(startVertex);
-
-    aproximationtourCost = calculateTourCost(aproximationtour);
-    //resetNodesVisitation();
-}
-
-double TspManager::calculateTourCost(vector<Vertex<int> *> tour) {
-    double totalCost = 0.0;
-
-    // Iterate through the tour vector to accumulate the edge weights
-    for (size_t i = 0; i < tour.size() - 1; ++i) {
-        Vertex<int> *current = tour[i];
-        Vertex<int> *next = tour[i + 1];
-
-        // Find the edge connecting current to next
-        bool edgeFound = false;
-        for (auto &edge: current->getAdj()) {
-            if (edge->getDest() == next) {
-                totalCost += edge->getWeight();
-                edgeFound = true;
-                break;
-            }
-        }
-
-        // Handle the case if an edge is not found (graph might be incomplete or tour might be incorrect)
-        if (!edgeFound) {
-            cerr << "Edge not found between " << current->getInfo() << " and " << next->getInfo() << "\n";
-            return -1; // or any other error handling
-        }
-    }
-
-    // Since the tour should return to the start vertex, add the cost of returning to the first vertex
-    Vertex<int> *last = tour.back();
-    Vertex<int> *first = tour.front();
-
-    bool returnEdgeFound = false;
-    for (auto &edge: last->getAdj()) {
-        if (edge->getDest() == first) {
-            totalCost += edge->getWeight();
-            returnEdgeFound = true;
-            break;
-        }
-    }
-
-    if (!returnEdgeFound) {
-        cerr << "Return edge not found between " << last->getInfo() << " and " << first->getInfo() << "\n";
-        return -1; // or any other error handling
-    }
-
-    return totalCost;
-}
-
-// Inside TspManager class
-
-void TspManager::TSPRealWorldInput() {
-    if (!graph.getVertexSet().empty()) {
-        int startNode;
-        cout << "Enter the starting node: ";
-        cin >> startNode;
-
-        if (startNode < 0 || startNode >= graph.getNumVertex()) {
-            cout << "Invalid starting node!" << endl;
-            return;
-        }
-
-        aproximationtour.clear();
-        aproximationtourCost = 0.0;
-
-        Vertex<int> *startVertex = graph.findVertex(startNode);
-        if (!startVertex) {
-            cerr << "Start node not found in the graph.\n";
-            return;
-        }
-
-        vector<Vertex<int> *> mst = prim(&graph);
-        for (auto v: graph.getVertexSet()) {
-            v->setVisited(false);
-        }
-
-        dfsMST(startVertex, mst);
-
-        if (aproximationtour.empty()) {
-            cout << "No path exists for the specified starting node!" << endl;
-            return;
-        }
-
-        cout << "Best tour: ";
-        double sum = aproximationtourCost;
-        for (size_t i = 0; i < aproximationtour.size(); i++) {
-            cout << aproximationtour[i]->getInfo() << " ";
-        }
-
-        cout << aproximationtour[0]->getInfo() << endl;
-        cout << "Total distance: " << fixed << setprecision(2) << sum << endl;
-    } else {
-        cout << "Graph is empty" << endl;
-    }
-}
-
-
 void TspManager::dfsMST1(Vertex<int> *v, const vector<Vertex<int> *> &mst) {
     v->setVisited(true);
-    aproximationtour.push_back(v);
+    aproximationTour.push_back(v);
 
     for (auto &edge: v->getAdj()) {
         Vertex<int> *neighbor = edge->getDest();
         if (!neighbor->isVisited()) {
-            aproximationtourCost += edge->getWeight();
+            aproximationTourCost += edge->getWeight();
             dfsMST1(neighbor, mst);
         }
     }
@@ -608,58 +385,6 @@ TspManager::dfsTSP(int vertex, unordered_set<int> &visited, vector<int> &tour, v
     tour.pop_back();
 }
 
-void TspManager::runModifiedDFS(int startVertex) {
-    if (graph.getVertexSet().empty()) {
-        cout << "Graph data is empty. Please parse the CSV file first.\n";
-        return;
-    }
-
-    unordered_set<int> visited;
-    vector<int> tour;
-    vector<int> bestTour;
-    double minCost = numeric_limits<double>::max();
-    dfsTSP(startVertex, visited, tour, bestTour, minCost, 0);
-
-    if (!bestTour.empty() && bestTour.front() == startVertex &&
-        hasEdge(graph.findVertex(bestTour.back()), graph.findVertex(bestTour.front()))) {
-        printTourCostModified(bestTour);
-    } else {
-        cout << "No path exists that returns to the origin and visits all nodes.\n";
-    }
-}
-
-void TspManager::TSPRealWorldInput1() {
-    if (graph.getVertexSet().empty()) {
-        cout << "Graph data is empty. Please parse the CSV file first.\n";
-        return;
-    }
-
-    // Choose an appropriate starting vertex
-    int startVertex = 0; // You may need to change this based on your specific requirements
-
-    // Run modified DFS to find the best tour
-    runModifiedDFS(startVertex);
-}
-
-void TspManager::printTourCostModified(const vector<int> &tour) {
-    cout << "Best tour: ";
-    for (int vertex: tour) {
-        cout << vertex << " ";
-    }
-    cout << tour.front(); // Printing the starting vertex again to complete the tour
-    cout << endl;
-
-    // Calculate the total cost of the tour
-    double totalCost = 0.0;
-    for (size_t i = 0; i < tour.size() - 1; ++i) {
-        totalCost += getEdgeWeight(graph, tour[i], tour[i + 1]);
-    }
-    // Add the cost of returning to the starting vertex
-    totalCost += getEdgeWeight(graph, tour.back(), tour.front());
-
-    cout << "Total cost: " << totalCost << endl;
-}
-
 void TspManager::compareAlgorithmsPerformance(bool incompleteGraph) {
     vector<int> bestTour;
     double totalWeight = INT_MAX;
@@ -672,13 +397,18 @@ void TspManager::compareAlgorithmsPerformance(bool incompleteGraph) {
     cout << "Time taken by backtracking algorithm: " << to_string(duration.count()) << " seconds" << endl;
     cout << "----------------//----------------" << endl;
 
+    totalWeight = 0.0;
     bestTour = {};
-    totalWeight = 0;
     start = chrono::high_resolution_clock::now();
-    TSPtriangularHeuristicMethod(bestTour, totalWeight);
+    TSPtriangularHeuristicMethod(bestTour, 0);
     end = chrono::high_resolution_clock::now();
     duration = end - start;
-    totalWeight += getEdgeWeight(graph, bestTour.back(), bestTour[0]);
+    for (int i = 0; i < bestTour.size(); i++) {
+        if (i > 0) {
+            totalWeight += getEdgeWeight(graph, bestTour[i - 1], bestTour[i]);
+        }
+    }
+    totalWeight += graph.getEdgeWeight(bestTour.back(), bestTour[0]);
     cout << "Total weight: " << totalWeight << endl;
     cout << "Time taken by triangular heuristic algorithm: " << to_string(duration.count()) << " seconds" << endl;
     cout << "----------------//----------------" << endl;
@@ -742,6 +472,35 @@ void TspManager::TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVe
             }
         }
     }
+}
+
+void TspManager::dfsRealWorld(){
+    int source;
+    cout << "Enter the starting node: ";
+    cin >> source;
+
+    auto start = chrono::high_resolution_clock::now();
+    auto res = graph.findMST_DFS(source);
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration = end - start;
+
+    double totalWeight = 0.0;
+    cout << res[0]->getOrig()->getInfo() << " ";
+    for (auto i : res){
+        cout << i->getDest()->getInfo() << " ";
+        totalWeight += i->getWeight();
+    }
+    for (auto e : res.back()->getDest()->getAdj()){
+        if (e->getDest()->getInfo() == res[0]->getOrig()->getInfo()) {
+            cout << e->getDest()->getInfo() << endl;
+            totalWeight += e->getWeight();
+            break;
+        }
+    }
+
+    cout << endl;
+    cout << "Total weight: " << totalWeight << endl;
+    cout << "Time taken by DFS algorithm: " << to_string(duration.count()) << " seconds" << endl;
 }
 
 

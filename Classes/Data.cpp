@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Data::Data(const std::string &s) {
+Data::Data(const string &s) {
     if (s == "shipping") {
         readToyGraphs("../dataset/Toy-Graphs/shipping.csv");
     } else if (s == "stadiums") {
@@ -60,15 +60,15 @@ Data::Data(const std::string &s) {
     }
 }
 
-const std::unordered_map<int, std::pair<float, float>> &Data::getNodes() const {
+const unordered_map<int, pair<float, float>> &Data::getNodes() const {
     return this->nodesloc;
 }
 
-const unordered_map<int, std::pair<float, float>> Data::getNodesLoc() const {
+const unordered_map<int, pair<float, float>> Data::getNodesLoc() const {
     return nodesloc;
 }
 
-const unordered_map<int, std::string> Data::getLabels() const {
+const unordered_map<int, string> Data::getLabels() const {
     return labels;
 }
 
@@ -77,7 +77,7 @@ const Graph<int> &Data::getGraph() const {
 }
 
 
-void Data::readToyGraphsTourism(const std::string &filename) {
+void Data::readToyGraphsTourism(const string &filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -106,13 +106,13 @@ void Data::readToyGraphsTourism(const std::string &filename) {
         graph.addVertex(vertex2);
         graph.addEdge(vertex1, vertex2, distance);
         graph.addEdge(vertex2, vertex1, distance);
-        labels.insert(std::make_pair(vertex1, label_origem));
-        labels.insert(std::make_pair(vertex2, label_destino));
+        labels.insert(make_pair(vertex1, label_origem));
+        labels.insert(make_pair(vertex2, label_destino));
     }
 }
 
 
-void Data::readExtraGraphs(const std::string &filename) {
+void Data::readExtraGraphs(const string &filename) {
 
     ifstream file(filename);
 
@@ -139,7 +139,7 @@ void Data::readExtraGraphs(const std::string &filename) {
     }
 }
 
-void Data::readToyGraphs(const std::string &filename) {
+void Data::readToyGraphs(const string &filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -171,7 +171,7 @@ void Data::readToyGraphs(const std::string &filename) {
 
 }
 
-void Data::readGraphs(const std::string &filename) {
+void Data::readGraphs(const string &filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -200,7 +200,7 @@ void Data::readGraphs(const std::string &filename) {
     }
 }
 
-void Data::readNodes(const std::string &filename) {
+void Data::readNodes(const string &filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -225,12 +225,12 @@ void Data::readNodes(const std::string &filename) {
         value2 = stof(temp);
 
         graph.addVertex(id);
-        nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
+        nodesloc.insert(make_pair(id, make_pair(value, value2)));
     }
 
 }
 
-void Data::readNodesExtra(const std::string &filename, int limit) {
+void Data::readNodesExtra(const string &filename, int limit) {
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -255,7 +255,7 @@ void Data::readNodesExtra(const std::string &filename, int limit) {
         value2 = stof(temp);
 
         graph.addVertex(id);
-        nodesloc.insert(std::make_pair(id, std::make_pair(value, value2)));
+        nodesloc.insert(make_pair(id, make_pair(value, value2)));
         limit--;
     }
 }
