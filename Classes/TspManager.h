@@ -12,14 +12,12 @@
 #include "MutablePriorityQueue.h"
 
 class TspManager {
-public :
+public:
     TspManager();
 
     TspManager(const Data &d);
 
     void TSPbacktracking();
-
-    void TSPtriangularHeuristic();
 
     void TSPprim(bool incompleteGraph);
 
@@ -27,24 +25,12 @@ public :
 
     void TSPtriangularHeuristicInput();
 
-    std::vector<Vertex<int>*> getAproximationTour() {
-        return aproximationtour;
-    }
-
-    double getAproximationTourCost() {
-        return aproximationtourCost;
-    }
-    std::vector<Vertex<int>*> aproximationtour;
-    double aproximationtourCost;
-
-
-    void TSPRealWorldInput();
-
-    void TSPRealWorldInput1();
-
     void compareAlgorithmsPerformance(bool incompleteGraph);
 
-    void TSPRealWorldInputReal();
+    void dfsRealWorld();
+
+    std::vector<Vertex<int>*> aproximationTour;
+    double aproximationTourCost;
 
 private:
     Graph<int> graph;
@@ -58,8 +44,6 @@ private:
     bool hasEdge(Vertex<int> *pVertex, Vertex<int> *pVertex1);
 
     double getEdgeWeight(Graph<int>& graph, int node, int i);
-
-    void TSPtriangularHeuristicMethod(std::vector<int> &vector1, double &totalWeight);
 
     void CompleteGraph(Graph<int> graphcopy);
 
@@ -77,21 +61,12 @@ private:
     void dfsMST(Vertex<int> *v, const std::vector<Vertex<int> *> &mst);
 
 
-    void triangularHeuristicAproximation22(const int startNodeId);
-
-    double calculateTourCost(std::vector<Vertex<int> *> vector1);
-
     void dfsMST1(Vertex<int> *v, const std::vector<Vertex<int> *> &mst);
 
-
-
-    void runModifiedDFS(int startVertex);
 
     void
     dfsTSP(int vertex, std::unordered_set<int> &visited, std::vector<int> &tour, std::vector<int> &bestTour, double &minCost,
            double currentCost);
-
-    void printTourCostModified(const std::vector<int> &tour);
 
     Graph<int> copyGraph(const Graph<int> &originalGraph);
 
