@@ -281,10 +281,32 @@ void Menu::showMenu() {
                 }
                 case '2': {
                     if (system != "shipping" && system != "real2" && system != "real3") {
-                        tspm.TSPtriangularHeuristicInput(); // NOSSO METODO
+                        drawTop();
+                        cout << "| 1. Triangular Heuristic Approximation            |" << endl;
+                        cout << "| 2. Triangular Heuristic Approximation Alternative|" << endl;
+                        cout << "| Q. Exit                                          |" << endl;
+                        drawBottom();
+                        cout << "Choose an option: ";
+                        cin >> key;
+                        switch (key) {
+                            case '1': {
+                                tspm.TSPtriangularHeuristicAlternativeInput();
+                                break;
+                            }
+                            case '2': {
+                                tspm.TSPtriangularHeuristicInput();
+                                break;
+                            }
+                            case 'Q' : {
+                                mainMenu = false;
+                                subMenu = false;
+                                break;
+                            }
+                            default: {
+                                cout << endl << "Invalid option!" << endl;
+                            }
+                        }
                     }
-                    else
-                        cout << "This option is not available for this dataset." << endl;                    
                     break;
                 }
                 case '3': {
@@ -320,6 +342,7 @@ void Menu::showMenu() {
                 }
                 default: {
                     cout << endl << "Invalid option!" << endl;
+                    break;
                 }
             }
 
