@@ -1,0 +1,51 @@
+\doxysection{Data.\+h}
+\hypertarget{_data_8h_source}{}\label{_data_8h_source}\index{Data.h@{Data.h}}
+\mbox{\hyperlink{_data_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJECT\_2\_DATA\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJECT\_2\_DATA\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_data}{Data}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_data}{Data}}(\textcolor{keyword}{const}\ std::string\ \&s);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<int,\ std::pair<float,\ float>>\ \&\mbox{\hyperlink{class_data_a48a14ac2c1db84c63a0f34e230ddaf1c}{getNodes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_graph}{Graph<int>}}\ \&\mbox{\hyperlink{class_data_af362661c05495cb35102eac7d4c83596}{getGraph}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a0f1137954a6d40867cc6fd28df51dd0f}{readExtraGraphs}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a9bba754d2405989bf26db49282a0b963}{readToyGraphs}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_ab4c90594da3fe9daa2792bcec0637016}{readGraphs}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a8809ca48239b5d0b3b75574b01dd5482}{readNodes}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a4aec11025bef49cf11188f3f69c8ae67}{readToyGraphsTourism}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_data_a25d7ec2e6b45077fe19789727e3188b7}{readNodesExtra}}(\textcolor{keyword}{const}\ std::string\ \&filename,\ \textcolor{keywordtype}{int}\ limit);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ std::unordered\_map<int,\ std::pair<float,\ float>>\ \mbox{\hyperlink{class_data_ab0ab9f3e551d929917da9f8f57a6d2bc}{getNodesLoc}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ std::unordered\_map<int,\ std::string>\ \mbox{\hyperlink{class_data_ae3f1bf41761b8106083c6ae1e53d690b}{getLabels}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{class_graph}{Graph<int>}}\ graph;}
+\DoxyCodeLine{00083\ \ \ \ \ std::unordered\_map<int,\ std::pair<float,\ float>>\ nodesloc;}
+\DoxyCodeLine{00084\ \ \ \ \ std::unordered\_map<int,\ std::string>\ labels;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJECT\_2\_DATA\_H}}
+
+\end{DoxyCode}

@@ -166,28 +166,11 @@ public:
 
     std::vector<T> topsort() const;
 
-    double TSP_Backtracking() const;
-
-    std::vector<Edge<T>*> findMST_DFS(const T &source) const;
-
-    void dfsVisitMST(Vertex<T> *v, std::vector<Edge<T>*> &mstEdges) const;
-
     std::vector<Edge<T>> kruskalMST(const T &source);
 
 
-    double getEdgeWeight(const T &source, const T &destination) const {
-        Vertex<T> *v = findVertex(source);
-        if (v == nullptr) {
-            return std::numeric_limits<double>::max();
-        }
-        for (auto e: v->getAdj()) {
-            if (e->getDest()->getInfo() == destination) {
-                return e->getWeight();
-            }
-        }
-        return std::numeric_limits<double>::max();
+    double getEdgeWeight(const T &source, const T &destination) const;
 
-    }
 
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
@@ -425,16 +408,7 @@ std::unordered_map<std::string, Vertex<T> *> Graph<T>::getVertexMap() const {
     return vertexMap;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
- */
-/*template<class T>
-Vertex<T> *Graph<T>::findVertex(const T &in) const {
-    for (auto v: vertexSet)
-        if (v->getInfo() == in)
-            return v;
-    return nullptr;
-}*/
+
 template<class T>
 Vertex<T> *Graph<T>::findVertex(const T &in) const {
     auto it = vertexMap.find(in);
@@ -444,9 +418,7 @@ Vertex<T> *Graph<T>::findVertex(const T &in) const {
     return nullptr;
 }
 
-/*
- * Finds the index of the vertex with a given content.
- */
+
 template<class T>
 int Graph<T>::findVertexIdx(const T &in) const {
     for (unsigned i = 0; i < vertexSet.size(); i++)
@@ -455,10 +427,6 @@ int Graph<T>::findVertexIdx(const T &in) const {
     return -1;
 }
 
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already exists.
- */
 
 template<class T>
 bool Graph<T>::addVertex(const T &in) {
@@ -472,27 +440,7 @@ bool Graph<T>::addVertex(const T &in) {
 }
 
 
-/*
- *  Removes a vertex with a given content (in) from a graph (this), and
- *  all outgoing and incoming edges.
- *  Returns true if successful, and false if such vertex does not exist.
- */
-/*template<class T>
-bool Graph<T>::removeVertex(const T &in) {
-    for (auto it = vertexSet.begin(); it != vertexSet.end(); it++) {
-        if ((*it)->getInfo() == in) {
-            auto v = *it;
-            v->removeOutgoingEdges();
-            for (auto u: vertexSet) {
-                u->removeEdge(v->getInfo());
-            }
-            vertexSet.erase(it);
-            delete v;
-            return true;
-        }
-    }
-    return false;
-}*/
+
 template<class T>
 bool Graph<T>::removeVertex(const T &in) {
     auto it = vertexMap.find(in);
@@ -521,11 +469,7 @@ void Graph<T>::resetNodes() {
     }
 }
 
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex does not exist.
- */
+
 template<class T>
 bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
     auto v1 = findVertex(sourc);
@@ -536,11 +480,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
     return true;
 }
 
-/*
- * Removes an edge from a graph (this).
- * The edge is identified by the source (sourc) and destination (dest) contents.
- * Returns true if successful, and false if such edge does not exist.
- */
+
 template<class T>
 bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
     Vertex<T> *srcVertex = findVertex(sourc);
@@ -563,12 +503,7 @@ bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w) {
     return true;
 }
 
-/****************** DFS ********************/
 
-/*
- * Performs a depth-first search (dfs) traversal in a graph (this).
- * Returns a vector with the contents of the vertices by dfs order.
- */
 template<class T>
 std::vector<T> Graph<T>::dfs() const {
     std::vector<T> res;
@@ -580,10 +515,7 @@ std::vector<T> Graph<T>::dfs() const {
     return res;
 }
 
-/*
- * Performs a depth-first search (dfs) in a graph (this) from the source node.
- * Returns a vector with the contents of the vertices by dfs order.
- */
+
 template<class T>
 std::vector<T> Graph<T>::dfs(const T &source) const {
     std::vector<int> res;
@@ -602,10 +534,7 @@ std::vector<T> Graph<T>::dfs(const T &source) const {
     return res;
 }
 
-/*
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Updates a parameter with the list of visited node contents.
- */
+
 template<class T>
 void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> &res) const {
     v->setVisited(true);
@@ -618,12 +547,7 @@ void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> &res) const {
     }
 }
 
-/****************** BFS ********************/
-/*
- * Performs a breadth-first search (bfs) in a graph (this), starting
- * from the vertex with the given source contents (source).
- * Returns a vector with the contents of the vertices by bfs order.
- */
+
 template<class T>
 std::vector<T> Graph<T>::bfs(const T &source) const {
     std::vector<int> res;
@@ -657,15 +581,6 @@ std::vector<T> Graph<T>::bfs(const T &source) const {
     return res;
 }
 
-/****************** isDAG  ********************/
-/*
- * Performs a depth-first search in a graph (this), to determine if the graph
- * is acyclic (acyclic directed graph or DAG).
- * During the search, a cycle is found if an edge connects to a vertex
- * that is being processed in the stack of recursive calls (see theoretical classes).
- * Returns true if the graph is acyclic, and false otherwise.
- */
-
 template<class T>
 bool Graph<T>::isDAG() const {
     for (auto v: vertexSet) {
@@ -680,10 +595,6 @@ bool Graph<T>::isDAG() const {
     return true;
 }
 
-/**
- * Auxiliary function that visits a vertex (v) and its adjacent, recursively.
- * Returns false (not acyclic) if an edge to a vertex in the stack is found.
- */
 template<class T>
 bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
     v->setVisited(true);
@@ -699,17 +610,6 @@ bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
     return true;
 }
 
-/****************** toposort ********************/
-//=============================================================================
-// Exercise 1: Topological Sorting
-//=============================================================================
-// TODO
-/*
- * Performs a topological sorting of the vertices of a graph (this).
- * Returns a vector with the contents of the vertices by topological order.
- * If the graph has cycles, returns an empty vector.
- * Follows the algorithm described in theoretical classes.
- */
 
 template<class T>
 std::vector<T> Graph<T>::topsort() const {
@@ -746,37 +646,11 @@ std::vector<T> Graph<T>::topsort() const {
     }
 
     if (res.size() != vertexSet.size()) {
-        //std::cout << "Impossible topological ordering!" << std::endl;
         res.clear();
         return res;
     }
 
     return res;
-}
-
-template<class T>
-std::vector<Edge<T>*> Graph<T>::findMST_DFS(const T &source) const {
-    std::vector<Edge<T>*> mstEdges;
-    auto start = findVertex(source);
-    if (!start) return mstEdges;
-
-    for (auto v : vertexSet) v->setVisited(false);
-
-    dfsVisitMST(start, mstEdges);
-
-    return mstEdges;
-}
-
-template<class T>
-void Graph<T>::dfsVisitMST(Vertex<T> *v, std::vector<Edge<T>*> &mstEdges) const {
-    v->setVisited(true);
-    for (auto &e : v->getAdj()) {
-        auto w = e->getDest();
-        if (!w->isVisited()) {
-            mstEdges.push_back(e);
-            dfsVisitMST(w, mstEdges);
-        }
-    }
 }
 
 
@@ -786,12 +660,12 @@ class DisjointSets {
     std::unordered_map<T, int> rank;
 
 public:
-    void makeSet(T const &item) {
+    void makeSet(T const &item){
         parent[item] = item;
         rank[item] = 0;
     }
 
-    T findSet(T const &item) {
+    T findSet(T const &item){
         if (parent[item] != item) {
             parent[item] = findSet(parent[item]);
         }
@@ -802,7 +676,7 @@ public:
         T root1 = findSet(set1);
         T root2 = findSet(set2);
 
-        if (root1 != root2) {
+        if (root1 != root2){
             if (rank[root1] > rank[root2]) {
                 parent[root2] = root1;
             } else if (rank[root1] < rank[root2]) {
@@ -819,7 +693,6 @@ template<class T>
 std::vector<Edge<T>> Graph<T>::kruskalMST(const T &source) {
     std::vector<Edge<T>> edges;
     std::vector<T> vertices;
-    // Collect all vertices and edges
     for (auto v : vertexSet) {
         vertices.push_back(v->getInfo());
         for (auto e : v->getAdj()) {
@@ -827,9 +700,7 @@ std::vector<Edge<T>> Graph<T>::kruskalMST(const T &source) {
         }
     }
 
-    // Sort edges by weight, with edges connected to the source node first
     std::sort(edges.begin(), edges.end(), [&source](const Edge<T>& a, const Edge<T>& b) {
-        // Compare function to prioritize edges connected to the source node
         if (a.getOrig()->getInfo() == source && b.getOrig()->getInfo() != source) {
             return true;
         } else if (a.getOrig()->getInfo() != source && b.getOrig()->getInfo() == source) {
@@ -839,13 +710,11 @@ std::vector<Edge<T>> Graph<T>::kruskalMST(const T &source) {
         }
     });
 
-    // Initialize DisjointSets
     DisjointSets<T> ds;
     for (const T &v : vertices) {
         ds.makeSet(v);
     }
 
-    // Initialize MST and perform Kruskal's algorithm
     std::vector<Edge<T>> mst;
     for (const Edge<T> &e : edges) {
         T u = e.getOrig()->getInfo();
@@ -856,7 +725,6 @@ std::vector<Edge<T>> Graph<T>::kruskalMST(const T &source) {
         }
     }
 
-    // Filter the MST edges to only include those in the connected component of the source
     std::vector<Edge<T>> result;
     if (std::find(vertices.begin(), vertices.end(), source) != vertices.end()) {
         T sourceComponent = ds.findSet(source);
@@ -869,6 +737,20 @@ std::vector<Edge<T>> Graph<T>::kruskalMST(const T &source) {
     return result;
 }
 
+template<class T>
+double Graph<T>::getEdgeWeight(const T &source, const T &destination) const {
+    Vertex<T> *v = findVertex(source);
+    if (v == nullptr) {
+        return std::numeric_limits<double>::max();
+    }
+    for (auto e: v->getAdj()) {
+        if (e->getDest()->getInfo() == destination) {
+            return e->getWeight();
+        }
+    }
+    return std::numeric_limits<double>::max();
+
+}
 
 inline void deleteMatrix(int **m, int n) {
     if (m != nullptr) {

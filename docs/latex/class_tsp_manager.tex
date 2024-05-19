@@ -1,0 +1,144 @@
+\doxysection{Tsp\+Manager Class Reference}
+\hypertarget{class_tsp_manager}{}\label{class_tsp_manager}\index{TspManager@{TspManager}}
+
+
+{\ttfamily \#include $<$Tsp\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tsp_manager_a2bfde5551961820c2d05182a83b9cc7d}{Tsp\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_tsp_manager_ad23f7208e6c17bd1ca58dbc4516e0d84}{Tsp\+Manager}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_data}{Data}} \&\mbox{\hyperlink{class_edge}{d}})
+\begin{DoxyCompactList}\small\item\em Constructor that initializes the graph, nodes location and labels from the given data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_a4c7a4e3b4f9a63833ff2a2c89a9c8096}{tsp\+Backtracking}} ()
+\begin{DoxyCompactList}\small\item\em Executes the backtracking algorithm for the TSP problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_ac8be24244ee9da7d7024c905a8b5b20f}{tsp\+Prim}} (\mbox{\hyperlink{class_edge}{bool}} \mbox{\hyperlink{class_edge}{incomplete\+Graph}})
+\begin{DoxyCompactList}\small\item\em Executes the Prim\textquotesingle{}s algorithm for the TSP problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_a67f4faf6cef9c12cb3dead5abf70bce5}{print\+Network\+Info}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{system}})
+\begin{DoxyCompactList}\small\item\em Prints the network information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_a58a7091c75233269bbf28f5412e62e76}{tsp\+Triangular\+Heuristic\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Executes the triangular heuristic algorithm for the TSP problem with user input. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_aae4972c2fe8866bd424e9fca51dd12a0}{compare\+Algorithms\+Performance}} ()
+\begin{DoxyCompactList}\small\item\em Compares the performance of the backtracking, triangular heuristic and Prim\textquotesingle{}s algorithms. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_ab344f7bc7759e54c5c234b12ff58bfe2}{kruskal\+Real\+World}} ()
+\begin{DoxyCompactList}\small\item\em Executes the Kruskal\textquotesingle{}s algorithm for the real world problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_tsp_manager_a8c8def20455338f17832f8a6c34745ca}{tsp\+Triangular\+Heuristic\+Alternative\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Executes the triangular heuristic algorithm for the TSP problem with alternative user input. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tsp_manager_a2bfde5551961820c2d05182a83b9cc7d}\label{class_tsp_manager_a2bfde5551961820c2d05182a83b9cc7d} 
+\index{TspManager@{TspManager}!TspManager@{TspManager}}
+\index{TspManager@{TspManager}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{TspManager()}{TspManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Tsp\+Manager\+::\+Tsp\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Time complexity\+: O(1) \Hypertarget{class_tsp_manager_ad23f7208e6c17bd1ca58dbc4516e0d84}\label{class_tsp_manager_ad23f7208e6c17bd1ca58dbc4516e0d84} 
+\index{TspManager@{TspManager}!TspManager@{TspManager}}
+\index{TspManager@{TspManager}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{TspManager()}{TspManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Tsp\+Manager\+::\+Tsp\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_data}{Data}} \&}]{d }\end{DoxyParamCaption})}
+
+
+
+Constructor that initializes the graph, nodes location and labels from the given data. 
+
+Time complexity\+: O(1) 
+\begin{DoxyParams}{Parameters}
+{\em d} & \doxylink{class_data}{Data} object containing the graph, nodes location and labels \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tsp_manager_aae4972c2fe8866bd424e9fca51dd12a0}\label{class_tsp_manager_aae4972c2fe8866bd424e9fca51dd12a0} 
+\index{TspManager@{TspManager}!compareAlgorithmsPerformance@{compareAlgorithmsPerformance}}
+\index{compareAlgorithmsPerformance@{compareAlgorithmsPerformance}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{compareAlgorithmsPerformance()}{compareAlgorithmsPerformance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::compare\+Algorithms\+Performance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Compares the performance of the backtracking, triangular heuristic and Prim\textquotesingle{}s algorithms. 
+
+\Hypertarget{class_tsp_manager_ab344f7bc7759e54c5c234b12ff58bfe2}\label{class_tsp_manager_ab344f7bc7759e54c5c234b12ff58bfe2} 
+\index{TspManager@{TspManager}!kruskalRealWorld@{kruskalRealWorld}}
+\index{kruskalRealWorld@{kruskalRealWorld}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{kruskalRealWorld()}{kruskalRealWorld()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::kruskal\+Real\+World (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executes the Kruskal\textquotesingle{}s algorithm for the real world problem. 
+
+Time complexity\+: O(\+Elog\+E), where E is the number of edges in the graph \Hypertarget{class_tsp_manager_a67f4faf6cef9c12cb3dead5abf70bce5}\label{class_tsp_manager_a67f4faf6cef9c12cb3dead5abf70bce5} 
+\index{TspManager@{TspManager}!printNetworkInfo@{printNetworkInfo}}
+\index{printNetworkInfo@{printNetworkInfo}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{printNetworkInfo()}{printNetworkInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::print\+Network\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{system }\end{DoxyParamCaption})}
+
+
+
+Prints the network information. 
+
+Time complexity\+: O(\+V), where V is the number of vertices in the graph 
+\begin{DoxyParams}{Parameters}
+{\em system} & String indicating the system type \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_tsp_manager_a4c7a4e3b4f9a63833ff2a2c89a9c8096}\label{class_tsp_manager_a4c7a4e3b4f9a63833ff2a2c89a9c8096} 
+\index{TspManager@{TspManager}!tspBacktracking@{tspBacktracking}}
+\index{tspBacktracking@{tspBacktracking}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{tspBacktracking()}{tspBacktracking()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::tsp\+Backtracking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executes the backtracking algorithm for the TSP problem. 
+
+Time complexity\+: O(n!), where n is the number of vertices in the graph \Hypertarget{class_tsp_manager_ac8be24244ee9da7d7024c905a8b5b20f}\label{class_tsp_manager_ac8be24244ee9da7d7024c905a8b5b20f} 
+\index{TspManager@{TspManager}!tspPrim@{tspPrim}}
+\index{tspPrim@{tspPrim}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{tspPrim()}{tspPrim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::tsp\+Prim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{bool}}}]{incomplete\+Graph }\end{DoxyParamCaption})}
+
+
+
+Executes the Prim\textquotesingle{}s algorithm for the TSP problem. 
+
+Time complexity\+: O(\+Elog\+V), where E is the number of edges and V is the number of vertices in the graph 
+\begin{DoxyParams}{Parameters}
+{\em incomplete\+Graph} & Boolean indicating if the graph is incomplete \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_tsp_manager_a8c8def20455338f17832f8a6c34745ca}\label{class_tsp_manager_a8c8def20455338f17832f8a6c34745ca} 
+\index{TspManager@{TspManager}!tspTriangularHeuristicAlternativeInput@{tspTriangularHeuristicAlternativeInput}}
+\index{tspTriangularHeuristicAlternativeInput@{tspTriangularHeuristicAlternativeInput}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{tspTriangularHeuristicAlternativeInput()}{tspTriangularHeuristicAlternativeInput()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::tsp\+Triangular\+Heuristic\+Alternative\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executes the triangular heuristic algorithm for the TSP problem with alternative user input. 
+
+Time complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices in the graph \Hypertarget{class_tsp_manager_a58a7091c75233269bbf28f5412e62e76}\label{class_tsp_manager_a58a7091c75233269bbf28f5412e62e76} 
+\index{TspManager@{TspManager}!tspTriangularHeuristicInput@{tspTriangularHeuristicInput}}
+\index{tspTriangularHeuristicInput@{tspTriangularHeuristicInput}!TspManager@{TspManager}}
+\doxysubsubsection{\texorpdfstring{tspTriangularHeuristicInput()}{tspTriangularHeuristicInput()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Tsp\+Manager\+::tsp\+Triangular\+Heuristic\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executes the triangular heuristic algorithm for the TSP problem with user input. 
+
+Time complexity\+: O(\+V\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices in the graph 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_tsp_manager_8h}{Tsp\+Manager.\+h}}\item 
+\mbox{\hyperlink{_tsp_manager_8cpp}{Tsp\+Manager.\+cpp}}\end{DoxyCompactItemize}
