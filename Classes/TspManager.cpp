@@ -503,4 +503,171 @@ void TspManager::dfsRealWorld(){
     cout << "Time taken by DFS algorithm: " << to_string(duration.count()) << " seconds" << endl;
 }
 
+/*
+
+
+vector<Vertex<int> *> prim(Graph<int> *g) {
+    if (g->getVertexSet().empty()) {
+        return g->getVertexSet();
+    }
+    for (auto v: g->getVertexSet()) {
+        v->setDist(INT_MAX);
+        v->setPath(nullptr);
+        v->setVisited(false);
+    }
+    Vertex<int> *s = g->getVertexSet().front();
+    s->setDist(0);
+    MutablePriorityQueue<Vertex<int>> q;
+    q.insert(s);
+    while (!q.empty()) {
+        auto v = q.extractMin();
+        v->setVisited(true);
+        for (auto &e: v->getAdj()) {
+            Vertex<int> *w = e->getDest();
+            if (!w->isVisited()) {
+                auto oldDist = w->getDist();
+                if (e->getWeight() < oldDist) {
+                    w->setDist(e->getWeight());
+
+                    w->setPath(e);
+                    if (oldDist == INT_MAX) {
+                        q.insert(w);
+                    } else {
+                        q.decreaseKey(w);
+                    }
+                }
+            }
+        }
+    }
+
+    return g->getVertexSet();
+}
+*/
+
+/*void TspManager::dfsMST(Vertex<int> *v, const vector<Vertex<int> *> &mst) {
+    v->setVisited(true);
+
+    if (find(aproximationtour.begin(), aproximationtour.end(), v) == aproximationtour.end()) {
+        aproximationtour.push_back(v);
+    }
+
+    for (auto &edge: v->getAdj()) {
+        Vertex<int> *neighbor = edge->getDest();
+        if (!neighbor->isVisited()) {
+            aproximationtourCost += edge->getWeight();
+            dfsMST(neighbor, mst);
+        }
+    }
+}*/
+
+void TspManager::TSPtriangularHeuristicAlternativeInput() {
+    if (!graph.getVertexSet().empty()) {
+        int startNode;
+        cout << "Enter the starting node: ";
+        cin >> startNode;
+
+        if (startNode < 0 || startNode >= graph.getNumVertex()) {
+            cout << "Invalid starting node!" << endl;
+            return;
+        }
+        triangularHeuristicAproximation22(startNode);
+
+        cout << "Best tour: ";
+        double sum = 0.0;
+        for (size_t i = 0; i < aproximationTour.size(); i++) {
+            cout << aproximationTour[i]->getInfo() << " ";
+            if (i > 0) {
+                sum += getEdgeWeight(graph, aproximationTour[i - 1]->getInfo(), aproximationTour[i]->getInfo());
+            }
+        }
+
+        sum += getEdgeWeight(graph, aproximationTour.back()->getInfo(), aproximationTour[0]->getInfo());
+        cout << aproximationTour[0]->getInfo() << endl;
+        cout << "Total distance: " << fixed << setprecision(2) << sum << endl;
+    }
+}
+
+void TspManager::triangularHeuristicAproximation22(const int startNodeId) {
+    aproximationTour.clear();
+    aproximationTourCost = 0.0;
+
+    Vertex<int> *startVertex = graph.findVertex(startNodeId);
+    if (!startVertex) {
+        cerr << "Start node not found in the graph.\n";
+        return;
+    }
+
+    vector<Vertex<int> *> mst = prim(&graph);
+
+    for (auto v: graph.getVertexSet()) {
+        v->setVisited(false);
+    }
+    Graph<int> mstGraph;
+    for (auto v: mst) {
+        mstGraph.addVertex(v->getInfo());
+        auto ep = v->getPath();
+        if (ep != nullptr) {
+            if (!mstGraph.addBidirectionalEdge(ep->getOrig()->getInfo(), ep->getDest()->getInfo(), ep->getWeight())) {
+                mstGraph.addVertex(ep->getOrig()->getInfo());
+                mstGraph.addVertex(ep->getDest()->getInfo());
+                mstGraph.addBidirectionalEdge(ep->getOrig()->getInfo(), ep->getDest()->getInfo(), ep->getWeight());
+            }
+        }
+    }
+    //dfsMST(startVertex, mstGraph.getVertexSet());
+    auto vector1 = mstGraph.dfs();
+    for (auto s: vector1) {
+        aproximationTour.push_back(graph.findVertex(s));
+    }
+    aproximationTour.push_back(startVertex);
+
+    aproximationTourCost = calculateTourCost(aproximationTour);
+    //resetNodesVisitation();
+}
+
+double TspManager::calculateTourCost(vector<Vertex<int> *> tour) {
+    double totalCost = 0.0;
+
+    // Iterate through the tour vector to accumulate the edge weights
+    for (size_t i = 0; i < tour.size() - 1; ++i) {
+        Vertex<int> *current = tour[i];
+        Vertex<int> *next = tour[i + 1];
+
+        // Find the edge connecting current to next
+        bool edgeFound = false;
+        for (auto &edge: current->getAdj()) {
+            if (edge->getDest() == next) {
+                totalCost += edge->getWeight();
+                edgeFound = true;
+                break;
+            }
+        }
+
+        // Handle the case if an edge is not found (graph might be incomplete or tour might be incorrect)
+        if (!edgeFound) {
+            cerr << "Edge not found between " << current->getInfo() << " and " << next->getInfo() << "\n";
+            return -1; // or any other error handling
+        }
+    }
+
+    // Since the tour should return to the start vertex, add the cost of returning to the first vertex
+    Vertex<int> *last = tour.back();
+    Vertex<int> *first = tour.front();
+
+    bool returnEdgeFound = false;
+    for (auto &edge: last->getAdj()) {
+        if (edge->getDest() == first) {
+            totalCost += edge->getWeight();
+            returnEdgeFound = true;
+            break;
+        }
+    }
+
+    if (!returnEdgeFound) {
+        cerr << "Return edge not found between " << last->getInfo() << " and " << first->getInfo() << "\n";
+        return -1; // or any other error handling
+    }
+
+    return totalCost;
+}
 

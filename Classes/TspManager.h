@@ -32,6 +32,8 @@ public:
     std::vector<Vertex<int>*> aproximationTour;
     double aproximationTourCost;
 
+    void TSPtriangularHeuristicAlternativeInput();
+
 private:
     Graph<int> graph;
     std::unordered_map<int, std::pair<float, float>> nodesloc;
@@ -72,6 +74,10 @@ private:
 
     void
     TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVertex, std::vector<Edge<int> *> &shortestPathEdges);
+
+    void triangularHeuristicAproximation22(const int startNodeId);
+
+    double calculateTourCost(std::vector<Vertex<int> *> tour);
 
 };
 
