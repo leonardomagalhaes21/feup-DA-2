@@ -2,6 +2,7 @@
 #define PROJ2_MENU_H
 
 #include "Data.h"
+#include <iostream>
 #include "TspManager.h"
 #include "Graph.h"
 
