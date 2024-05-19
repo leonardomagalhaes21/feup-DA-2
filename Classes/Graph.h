@@ -175,6 +175,8 @@ public:
 
     void dfsVisitMST(Vertex<T> *v, std::vector<Edge<T>*> &mstEdges) const;
 
+    std::vector<Edge<T>> kruskalMST(const T &source);
+
 
     double getEdgeWeight(const T &source, const T &destination) const {
         Vertex<T> *v = findVertex(source);
@@ -779,6 +781,97 @@ void Graph<T>::dfsVisitMST(Vertex<T> *v, std::vector<Edge<T>*> &mstEdges) const 
         }
     }
 }
+
+
+template<class T>
+class DisjointSets {
+    std::unordered_map<T, T> parent;
+    std::unordered_map<T, int> rank;
+
+public:
+    void makeSet(T const &item) {
+        parent[item] = item;
+        rank[item] = 0;
+    }
+
+    T findSet(T const &item) {
+        if (parent[item] != item) {
+            parent[item] = findSet(parent[item]);
+        }
+        return parent[item];
+    }
+
+    void unionSets(T const &set1, T const &set2) {
+        T root1 = findSet(set1);
+        T root2 = findSet(set2);
+
+        if (root1 != root2) {
+            if (rank[root1] > rank[root2]) {
+                parent[root2] = root1;
+            } else if (rank[root1] < rank[root2]) {
+                parent[root1] = root2;
+            } else {
+                parent[root2] = root1;
+                rank[root1]++;
+            }
+        }
+    }
+};
+
+template<class T>
+std::vector<Edge<T>> Graph<T>::kruskalMST(const T &source) {
+    std::vector<Edge<T>> edges;
+    std::vector<T> vertices;
+    // Collect all vertices and edges
+    for (auto v : vertexSet) {
+        vertices.push_back(v->getInfo());
+        for (auto e : v->getAdj()) {
+            edges.push_back(*e);
+        }
+    }
+
+    // Sort edges by weight, with edges connected to the source node first
+    std::sort(edges.begin(), edges.end(), [&source](const Edge<T>& a, const Edge<T>& b) {
+        // Compare function to prioritize edges connected to the source node
+        if (a.getOrig()->getInfo() == source && b.getOrig()->getInfo() != source) {
+            return true;
+        } else if (a.getOrig()->getInfo() != source && b.getOrig()->getInfo() == source) {
+            return false;
+        } else {
+            return a.getWeight() < b.getWeight();
+        }
+    });
+
+    // Initialize DisjointSets
+    DisjointSets<T> ds;
+    for (const T &v : vertices) {
+        ds.makeSet(v);
+    }
+
+    // Initialize MST and perform Kruskal's algorithm
+    std::vector<Edge<T>> mst;
+    for (const Edge<T> &e : edges) {
+        T u = e.getOrig()->getInfo();
+        T v = e.getDest()->getInfo();
+        if (ds.findSet(u) != ds.findSet(v)) {
+            mst.push_back(e);
+            ds.unionSets(u, v);
+        }
+    }
+
+    // Filter the MST edges to only include those in the connected component of the source
+    std::vector<Edge<T>> result;
+    if (std::find(vertices.begin(), vertices.end(), source) != vertices.end()) {
+        T sourceComponent = ds.findSet(source);
+        for (const Edge<T> &e : mst) {
+            if (ds.findSet(e.getOrig()->getInfo()) == sourceComponent || ds.findSet(e.getDest()->getInfo()) == sourceComponent) {
+                result.push_back(e);
+            }
+        }
+    }
+    return result;
+}
+
 
 inline void deleteMatrix(int **m, int n) {
     if (m != nullptr) {

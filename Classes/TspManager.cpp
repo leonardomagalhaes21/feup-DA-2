@@ -480,18 +480,18 @@ void TspManager::dfsRealWorld(){
     cin >> source;
 
     auto start = chrono::high_resolution_clock::now();
-    auto res = graph.findMST_DFS(source);
+    auto res = graph.kruskalMST(source);
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> duration = end - start;
 
     double totalWeight = 0.0;
-    cout << res[0]->getOrig()->getInfo() << " ";
+    cout << res[0].getOrig()->getInfo() << " ";
     for (auto i : res){
-        cout << i->getDest()->getInfo() << " ";
-        totalWeight += i->getWeight();
+        cout << i.getDest()->getInfo() << " ";
+        totalWeight += i.getWeight();
     }
-    for (auto e : res.back()->getDest()->getAdj()){
-        if (e->getDest()->getInfo() == res[0]->getOrig()->getInfo()) {
+    for (auto e : res.back().getDest()->getAdj()){
+        if (e->getDest()->getInfo() == res[0].getOrig()->getInfo()) {
             cout << e->getDest()->getInfo() << endl;
             totalWeight += e->getWeight();
             break;
@@ -499,7 +499,7 @@ void TspManager::dfsRealWorld(){
     }
 
     cout << endl;
-    cout << "Total weight: " << totalWeight << endl;
+    cout << "Total weight: " << fixed << setprecision(2) << totalWeight << endl;
     cout << "Time taken by DFS algorithm: " << to_string(duration.count()) << " seconds" << endl;
 }
 
@@ -621,52 +621,20 @@ void TspManager::triangularHeuristicAproximation22(const int startNodeId) {
     }
     aproximationTour.push_back(startVertex);
 
-    aproximationTourCost = calculateTourCost(aproximationTour);
+    aproximationTourCost = calculateTourCost(aproximationTour, graph);
     //resetNodesVisitation();
 }
 
-double TspManager::calculateTourCost(vector<Vertex<int> *> tour) {
+double TspManager::calculateTourCost(vector<Vertex<int> *> tour, Graph<int> &g) {
     double totalCost = 0.0;
 
-    // Iterate through the tour vector to accumulate the edge weights
-    for (size_t i = 0; i < tour.size() - 1; ++i) {
-        Vertex<int> *current = tour[i];
-        Vertex<int> *next = tour[i + 1];
-
-        // Find the edge connecting current to next
-        bool edgeFound = false;
-        for (auto &edge: current->getAdj()) {
-            if (edge->getDest() == next) {
-                totalCost += edge->getWeight();
-                edgeFound = true;
-                break;
-            }
-        }
-
-        // Handle the case if an edge is not found (graph might be incomplete or tour might be incorrect)
-        if (!edgeFound) {
-            cerr << "Edge not found between " << current->getInfo() << " and " << next->getInfo() << "\n";
-            return -1; // or any other error handling
+    for (size_t i = 0; i < tour.size(); i++) {
+        if (i > 0) {
+            totalCost += getEdgeWeight(g, tour[i - 1]->getInfo(), tour[i]->getInfo());
         }
     }
 
-    // Since the tour should return to the start vertex, add the cost of returning to the first vertex
-    Vertex<int> *last = tour.back();
-    Vertex<int> *first = tour.front();
-
-    bool returnEdgeFound = false;
-    for (auto &edge: last->getAdj()) {
-        if (edge->getDest() == first) {
-            totalCost += edge->getWeight();
-            returnEdgeFound = true;
-            break;
-        }
-    }
-
-    if (!returnEdgeFound) {
-        cerr << "Return edge not found between " << last->getInfo() << " and " << first->getInfo() << "\n";
-        return -1; // or any other error handling
-    }
+    totalCost += getEdgeWeight(g, tour.back()->getInfo(), tour[0]->getInfo());
 
     return totalCost;
 }

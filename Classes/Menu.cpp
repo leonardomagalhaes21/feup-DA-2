@@ -77,6 +77,10 @@ void Menu::showMenu() {
                         subMenu = false;
                         break;
                     }
+                    default : {
+                        cout << endl << "Invalid option!" << endl;
+                        break;
+                    }
                 }
                 break;
             }
@@ -120,6 +124,10 @@ void Menu::showMenu() {
                     case 'Q' : {
                         mainMenu = false;
                         subMenu = false;
+                        break;
+                    }
+                    default : {
+                        cout << endl << "Invalid option!" << endl;
                         break;
                     }
                 }
@@ -247,6 +255,10 @@ void Menu::showMenu() {
                         subMenu = false;
                         break;
                     }
+                    default : {
+                        cout << endl << "Invalid option!" << endl;
+                        break;
+                    }
                 }
                 break;
             }
@@ -307,6 +319,7 @@ void Menu::showMenu() {
                             }
                         }
                     }
+                    else cout << "This option is not available for this dataset." << endl;
                     break;
                 }
                 case '3': {
