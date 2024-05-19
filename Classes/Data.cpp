@@ -64,11 +64,11 @@ const unordered_map<int, pair<float, float>> &Data::getNodes() const {
     return this->nodesloc;
 }
 
-const unordered_map<int, pair<float, float>> Data::getNodesLoc() const {
+unordered_map<int, pair<float, float>> Data::getNodesLoc() const {
     return nodesloc;
 }
 
-const unordered_map<int, string> Data::getLabels() const {
+unordered_map<int, string> Data::getLabels() const {
     return labels;
 }
 

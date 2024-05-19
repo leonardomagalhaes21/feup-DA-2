@@ -77,6 +77,10 @@ void Menu::showMenu() {
                         subMenu = false;
                         break;
                     }
+                    default : {
+                        cout << endl << "Invalid option!" << endl;
+                        break;
+                    }
                 }
                 break;
             }
@@ -120,6 +124,10 @@ void Menu::showMenu() {
                     case 'Q' : {
                         mainMenu = false;
                         subMenu = false;
+                        break;
+                    }
+                    default : {
+                        cout << endl << "Invalid option!" << endl;
                         break;
                     }
                 }
@@ -245,6 +253,10 @@ void Menu::showMenu() {
                     case 'Q' : {
                         mainMenu = false;
                         subMenu = false;
+                        break;
+                    }
+                    default : {
+                        cout << endl << "Invalid option!" << endl;
                         break;
                     }
                 }

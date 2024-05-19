@@ -28,9 +28,9 @@ public:
     void readNodesExtra(const std::string &filename, int limit);
 
 
-    const std::unordered_map<int, std::pair<float, float>> getNodesLoc() const;
+    std::unordered_map<int, std::pair<float, float>> getNodesLoc() const;
 
-    const std::unordered_map<int, std::string> getLabels() const;
+    std::unordered_map<int, std::string> getLabels() const;
 
 
 private:
