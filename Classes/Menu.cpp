@@ -319,6 +319,7 @@ void Menu::showMenu() {
                             }
                         }
                     }
+                    else cout << "This option is not available for this dataset." << endl;
                     break;
                 }
                 case '3': {

@@ -480,18 +480,18 @@ void TspManager::dfsRealWorld(){
     cin >> source;
 
     auto start = chrono::high_resolution_clock::now();
-    auto res = graph.findMST_DFS(source);
+    auto res = graph.kruskalMST(source);
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> duration = end - start;
 
     double totalWeight = 0.0;
-    cout << res[0]->getOrig()->getInfo() << " ";
+    cout << res[0].getOrig()->getInfo() << " ";
     for (auto i : res){
-        cout << i->getDest()->getInfo() << " ";
-        totalWeight += i->getWeight();
+        cout << i.getDest()->getInfo() << " ";
+        totalWeight += i.getWeight();
     }
-    for (auto e : res.back()->getDest()->getAdj()){
-        if (e->getDest()->getInfo() == res[0]->getOrig()->getInfo()) {
+    for (auto e : res.back().getDest()->getAdj()){
+        if (e->getDest()->getInfo() == res[0].getOrig()->getInfo()) {
             cout << e->getDest()->getInfo() << endl;
             totalWeight += e->getWeight();
             break;
@@ -499,7 +499,7 @@ void TspManager::dfsRealWorld(){
     }
 
     cout << endl;
-    cout << "Total weight: " << totalWeight << endl;
+    cout << "Total weight: " << fixed << setprecision(2) << totalWeight << endl;
     cout << "Time taken by DFS algorithm: " << to_string(duration.count()) << " seconds" << endl;
 }
 
