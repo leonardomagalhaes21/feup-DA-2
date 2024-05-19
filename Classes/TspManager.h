@@ -43,9 +43,9 @@ private:
 
     void TSPRec(std::vector<int> &vector1, std::vector<bool> &vector2, double d, double &cost, std::vector<int> &vector3);
 
-    bool hasEdge(Vertex<int> *pVertex, Vertex<int> *pVertex1);
+    static bool hasEdge(Vertex<int> *pVertex, Vertex<int> *pVertex1);
 
-    double getEdgeWeight(Graph<int>& graph, int node, int i);
+    static double getEdgeWeight(Graph<int>& graph, int node, int i);
 
     void CompleteGraph(Graph<int> graphcopy);
 
@@ -53,7 +53,7 @@ private:
 
     float getLongitude(Vertex<int> *vertex) const;
 
-    double haversineDistance(double lat1, double lon1, double lat2, double lon2);
+    static double haversineDistance(double lat1, double lon1, double lat2, double lon2);
 
     void TSPtriangularHeuristicMethod(std::vector<int> &bestTour, int startNode);
 
@@ -70,14 +70,14 @@ private:
     dfsTSP(int vertex, std::unordered_set<int> &visited, std::vector<int> &tour, std::vector<int> &bestTour, double &minCost,
            double currentCost);
 
-    Graph<int> copyGraph(const Graph<int> &originalGraph);
+    static Graph<int> copyGraph(const Graph<int> &originalGraph);
 
-    void
+    static void
     TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVertex, std::vector<Edge<int> *> &shortestPathEdges);
 
-    void triangularHeuristicAproximation22(const int startNodeId);
+    void triangularHeuristicAproximation22(int startNodeId);
 
-    double calculateTourCost(std::vector<Vertex<int> *> tour);
+    static double calculateTourCost(std::vector<Vertex<int> *> tour);
 
 };
 
