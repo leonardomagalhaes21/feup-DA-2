@@ -2,6 +2,8 @@
 #define PROJ2_TSPMANAGER_H
 
 #include "Data.h"
+#include <iostream>
+#include <unordered_set>
 #include <string>
 #include <fstream>
 #include <unordered_map>

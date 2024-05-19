@@ -1,6 +1,4 @@
 #include "TspManager.h"
-#include <iostream>
-#include <unordered_set>
 
 using namespace std;
 
@@ -360,8 +358,7 @@ void TspManager::dfsMST1(Vertex<int> *v, const vector<Vertex<int> *> &mst) {
     }
 }
 
-void
-TspManager::dfsTSP(int vertex, unordered_set<int> &visited, vector<int> &tour, vector<int> &bestTour, double &minCost,
+void TspManager::dfsTSP(int vertex, unordered_set<int> &visited, vector<int> &tour, vector<int> &bestTour, double &minCost,
                    double currentCost) {
     visited.insert(vertex);
     tour.push_back(vertex);
@@ -449,8 +446,7 @@ Graph<int> TspManager::copyGraph(const Graph<int> &originalGraph) {
     return copiedGraph;
 }
 
-void TspManager::TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVertex,
-                               vector<Edge<int> *> &shortestPathEdges) {
+void TspManager::TSPprimMethod(const Graph<int> &graphTemp, Vertex<int> *startVertex,vector<Edge<int> *> &shortestPathEdges) {
     if (graphTemp.getNumVertex() == 0) return;
 
     unordered_set<Vertex<int> *> visitedVertices;

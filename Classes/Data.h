@@ -2,6 +2,8 @@
 #define PROJECT_2_DATA_H
 
 #include <unordered_map>
+#include <iostream>
+#include <sstream>
 #include <string>
 #include <fstream>
 #include "Graph.h"
