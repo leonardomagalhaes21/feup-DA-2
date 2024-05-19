@@ -77,7 +77,7 @@ private:
 
     void triangularHeuristicAproximation22(int startNodeId);
 
-    static double calculateTourCost(std::vector<Vertex<int> *> tour);
+    static double calculateTourCost(std::vector<Vertex<int> *> tour, Graph<int> &g);
 
 };
 
