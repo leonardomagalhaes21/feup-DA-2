@@ -33,9 +33,6 @@ public:
      */
     static void drawBottom();
 
-    template <class T>
-    double TSPbacktrack(Graph<T> *graph);
-
 };
 
 

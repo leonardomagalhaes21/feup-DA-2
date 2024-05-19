@@ -287,7 +287,7 @@ void Menu::showMenu() {
             cin >> key;
             switch (key) {
                 case '1': {
-                    tspm.TSPbacktracking();
+                    tspm.tspBacktracking();
                     break;
                 }
                 case '2': {
@@ -301,11 +301,11 @@ void Menu::showMenu() {
                         cin >> key;
                         switch (key) {
                             case '1': {
-                                tspm.TSPtriangularHeuristicAlternativeInput();
+                                tspm.tspTriangularHeuristicInput();
                                 break;
                             }
                             case '2': {
-                                tspm.TSPtriangularHeuristicInput();
+                                tspm.tspTriangularHeuristicAlternativeInput();
                                 break;
                             }
                             case 'Q' : {
@@ -322,12 +322,16 @@ void Menu::showMenu() {
                     break;
                 }
                 case '3': {
-                    bool flag = (system == "shipping" || system == "real2" || system == "real3");
-                    tspm.TSPprim(flag);
+                    if (system == "shipping") {
+                        cout << "This option is not available for this dataset." << endl;
+                        break;
+                    }
+                    bool flag = (system == "real2" || system == "real3");
+                    tspm.tspPrim(flag);
                     break;
                 }
                 case '4': {
-                    tspm.dfsRealWorld();
+                    tspm.kruskalRealWorld();
                     break;
                 }
                 case '5': {
@@ -337,8 +341,10 @@ void Menu::showMenu() {
                 }
 
                 case '6': {
-                    bool flag = (system == "shipping" || system == "real2" || system == "real3");
-                    tspm.compareAlgorithmsPerformance(flag);
+                    if (system != "shipping" && system != "real2" && system != "real3") {
+                        tspm.compareAlgorithmsPerformance();
+                    }
+                    else cout << "This option is not available for this dataset." << endl;
                     break;
                 }
 

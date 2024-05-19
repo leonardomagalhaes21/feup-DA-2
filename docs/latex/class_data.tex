@@ -1,0 +1,202 @@
+\doxysection{Data Class Reference}
+\hypertarget{class_data}{}\label{class_data}\index{Data@{Data}}
+
+
+{\ttfamily \#include $<$Data.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_data_a45c0c23ca3b46981ca42eca88d094417}{Data}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{s}})
+\begin{DoxyCompactList}\small\item\em Constructor that initializes the data from the given system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{const}} std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{class_edge}{int}}, std\+::pair$<$ \mbox{\hyperlink{class_edge}{float}}, \mbox{\hyperlink{class_edge}{float}} $>$ $>$ \& \mbox{\hyperlink{class_data_a48a14ac2c1db84c63a0f34e230ddaf1c}{get\+Nodes}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Gets the nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \& \mbox{\hyperlink{class_data_af362661c05495cb35102eac7d4c83596}{get\+Graph}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Gets the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a0f1137954a6d40867cc6fd28df51dd0f}{read\+Extra\+Graphs}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{filename}})
+\begin{DoxyCompactList}\small\item\em Reads the extra graphs from the given filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a9bba754d2405989bf26db49282a0b963}{read\+Toy\+Graphs}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{filename}})
+\begin{DoxyCompactList}\small\item\em Reads the toy graphs from the given filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_ab4c90594da3fe9daa2792bcec0637016}{read\+Graphs}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{filename}})
+\begin{DoxyCompactList}\small\item\em Reads the graphs from the given filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a8809ca48239b5d0b3b75574b01dd5482}{read\+Nodes}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{filename}})
+\begin{DoxyCompactList}\small\item\em Reads the nodes from the given filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a4aec11025bef49cf11188f3f69c8ae67}{read\+Toy\+Graphs\+Tourism}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{filename}})
+\begin{DoxyCompactList}\small\item\em Reads the toy graphs for tourism from the given filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_data_a25d7ec2e6b45077fe19789727e3188b7}{read\+Nodes\+Extra}} (\mbox{\hyperlink{class_edge}{const}} std\+::string \&\mbox{\hyperlink{class_edge}{filename}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{limit}})
+\begin{DoxyCompactList}\small\item\em Reads the nodes from the given filename with a limit. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{class_edge}{int}}, std\+::pair$<$ \mbox{\hyperlink{class_edge}{float}}, \mbox{\hyperlink{class_edge}{float}} $>$ $>$ \mbox{\hyperlink{class_data_ab0ab9f3e551d929917da9f8f57a6d2bc}{get\+Nodes\+Loc}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Gets the nodes location. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{class_edge}{int}}, std\+::string $>$ \mbox{\hyperlink{class_data_ae3f1bf41761b8106083c6ae1e53d690b}{get\+Labels}} () \mbox{\hyperlink{class_edge}{const}}
+\begin{DoxyCompactList}\small\item\em Gets the labels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_data_a45c0c23ca3b46981ca42eca88d094417}\label{class_data_a45c0c23ca3b46981ca42eca88d094417} 
+\index{Data@{Data}!Data@{Data}}
+\index{Data@{Data}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily Data\+::\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Constructor that initializes the data from the given system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & String indicating the system to be used \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_data_af362661c05495cb35102eac7d4c83596}\label{class_data_af362661c05495cb35102eac7d4c83596} 
+\index{Data@{Data}!getGraph@{getGraph}}
+\index{getGraph@{getGraph}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \& Data\+::get\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the graph. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_graph}{Graph} 
+\end{DoxyReturn}
+\Hypertarget{class_data_ae3f1bf41761b8106083c6ae1e53d690b}\label{class_data_ae3f1bf41761b8106083c6ae1e53d690b} 
+\index{Data@{Data}!getLabels@{getLabels}}
+\index{getLabels@{getLabels}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getLabels()}{getLabels()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{int}}, \mbox{\hyperlink{class_edge}{string}} $>$ Data\+::get\+Labels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the labels. 
+
+\begin{DoxyReturn}{Returns}
+Map of labels 
+\end{DoxyReturn}
+\Hypertarget{class_data_a48a14ac2c1db84c63a0f34e230ddaf1c}\label{class_data_a48a14ac2c1db84c63a0f34e230ddaf1c} 
+\index{Data@{Data}!getNodes@{getNodes}}
+\index{getNodes@{getNodes}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getNodes()}{getNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{int}}, \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_edge}{float}}, \mbox{\hyperlink{class_edge}{float}} $>$ $>$ \& Data\+::get\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the nodes. 
+
+\begin{DoxyReturn}{Returns}
+Map of nodes 
+\end{DoxyReturn}
+\Hypertarget{class_data_ab0ab9f3e551d929917da9f8f57a6d2bc}\label{class_data_ab0ab9f3e551d929917da9f8f57a6d2bc} 
+\index{Data@{Data}!getNodesLoc@{getNodesLoc}}
+\index{getNodesLoc@{getNodesLoc}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getNodesLoc()}{getNodesLoc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge}{int}}, \mbox{\hyperlink{class_edge}{pair}}$<$ \mbox{\hyperlink{class_edge}{float}}, \mbox{\hyperlink{class_edge}{float}} $>$ $>$ Data\+::get\+Nodes\+Loc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the nodes location. 
+
+\begin{DoxyReturn}{Returns}
+Map of nodes location 
+\end{DoxyReturn}
+\Hypertarget{class_data_a0f1137954a6d40867cc6fd28df51dd0f}\label{class_data_a0f1137954a6d40867cc6fd28df51dd0f} 
+\index{Data@{Data}!readExtraGraphs@{readExtraGraphs}}
+\index{readExtraGraphs@{readExtraGraphs}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{readExtraGraphs()}{readExtraGraphs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::read\+Extra\+Graphs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads the extra graphs from the given filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & String indicating the filename \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_ab4c90594da3fe9daa2792bcec0637016}\label{class_data_ab4c90594da3fe9daa2792bcec0637016} 
+\index{Data@{Data}!readGraphs@{readGraphs}}
+\index{readGraphs@{readGraphs}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{readGraphs()}{readGraphs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::read\+Graphs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads the graphs from the given filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & String indicating the filename \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_a8809ca48239b5d0b3b75574b01dd5482}\label{class_data_a8809ca48239b5d0b3b75574b01dd5482} 
+\index{Data@{Data}!readNodes@{readNodes}}
+\index{readNodes@{readNodes}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{readNodes()}{readNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::read\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads the nodes from the given filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & String indicating the filename \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_a25d7ec2e6b45077fe19789727e3188b7}\label{class_data_a25d7ec2e6b45077fe19789727e3188b7} 
+\index{Data@{Data}!readNodesExtra@{readNodesExtra}}
+\index{readNodesExtra@{readNodesExtra}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{readNodesExtra()}{readNodesExtra()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::read\+Nodes\+Extra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{limit }\end{DoxyParamCaption})}
+
+
+
+Reads the nodes from the given filename with a limit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & String indicating the filename \\
+\hline
+{\em limit} & Integer indicating the limit \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_a9bba754d2405989bf26db49282a0b963}\label{class_data_a9bba754d2405989bf26db49282a0b963} 
+\index{Data@{Data}!readToyGraphs@{readToyGraphs}}
+\index{readToyGraphs@{readToyGraphs}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{readToyGraphs()}{readToyGraphs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::read\+Toy\+Graphs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads the toy graphs from the given filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & String indicating the filename \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_a4aec11025bef49cf11188f3f69c8ae67}\label{class_data_a4aec11025bef49cf11188f3f69c8ae67} 
+\index{Data@{Data}!readToyGraphsTourism@{readToyGraphsTourism}}
+\index{readToyGraphsTourism@{readToyGraphsTourism}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{readToyGraphsTourism()}{readToyGraphsTourism()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Data\+::read\+Toy\+Graphs\+Tourism (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads the toy graphs for tourism from the given filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & String indicating the filename \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_data_8h}{Data.\+h}}\item 
+\mbox{\hyperlink{_data_8cpp}{Data.\+cpp}}\end{DoxyCompactItemize}

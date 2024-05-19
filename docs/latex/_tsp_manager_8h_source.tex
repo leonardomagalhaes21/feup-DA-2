@@ -1,0 +1,78 @@
+\doxysection{Tsp\+Manager.\+h}
+\hypertarget{_tsp_manager_8h_source}{}\label{_tsp_manager_8h_source}\index{TspManager.h@{TspManager.h}}
+\mbox{\hyperlink{_tsp_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJ2\_TSPMANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJ2\_TSPMANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_data_8h}{Data.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <climits>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_mutable_priority_queue_8h}{MutablePriorityQueue.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tsp_manager}{TspManager}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_tsp_manager_a2bfde5551961820c2d05182a83b9cc7d}{TspManager}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_tsp_manager_a2bfde5551961820c2d05182a83b9cc7d}{TspManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_data}{Data}}\ \&\mbox{\hyperlink{class_edge}{d}});}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_a4c7a4e3b4f9a63833ff2a2c89a9c8096}{tspBacktracking}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_ac8be24244ee9da7d7024c905a8b5b20f}{tspPrim}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_edge}{incompleteGraph}});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_a67f4faf6cef9c12cb3dead5abf70bce5}{printNetworkInfo}}(\textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_edge}{system}});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_a58a7091c75233269bbf28f5412e62e76}{tspTriangularHeuristicInput}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_aae4972c2fe8866bd424e9fca51dd12a0}{compareAlgorithmsPerformance}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_ab344f7bc7759e54c5c234b12ff58bfe2}{kruskalRealWorld}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tsp_manager_a8c8def20455338f17832f8a6c34745ca}{tspTriangularHeuristicAlternativeInput}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{class_edge}{Graph<int>}}\ graph;}
+\DoxyCodeLine{00076\ \ \ \ \ std::unordered\_map<int,\ std::pair<float,\ float>>\ nodesloc;}
+\DoxyCodeLine{00077\ \ \ \ \ std::unordered\_map<int,\ std::string>\ labels;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ tspBacktrackingMethod(std::vector<int>\ \&\mbox{\hyperlink{class_edge}{bestTour}},\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_edge}{minTourCost}});}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ tspRec(std::vector<int>\ \&\mbox{\hyperlink{class_edge}{tour}},\ std::vector<bool>\ \&visited,\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{currentCost}},\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_edge}{minCost}},\ std::vector<int>\ \&\mbox{\hyperlink{class_edge}{bestTour}});}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ hasEdge(\mbox{\hyperlink{class_edge}{Vertex<int>}}\ *\mbox{\hyperlink{class_edge}{pVertex}},\ \mbox{\hyperlink{class_edge}{Vertex<int>}}\ *\mbox{\hyperlink{class_edge}{pVertex1}});}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ getEdgeWeight(\mbox{\hyperlink{class_edge}{Graph<int>}}\&\ graph,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_edge}{node}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_edge}{i}});}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ completeGraph(\mbox{\hyperlink{class_edge}{Graph<int>}}\ \mbox{\hyperlink{class_edge}{graphCopy}});}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{float}\ getLatitude(\mbox{\hyperlink{class_edge}{Vertex<int>}}\ *\mbox{\hyperlink{class_edge}{vertex}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{float}\ getLongitude(\mbox{\hyperlink{class_edge}{Vertex<int>}}\ *\mbox{\hyperlink{class_edge}{vertex}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ haversineDistance(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{lat1}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{lon1}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{lat2}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_edge}{lon2}});}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ tspTriangularHeuristicMethod(std::vector<int>\ \&\mbox{\hyperlink{class_edge}{bestTour}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_edge}{startNode}});}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Vertex<int>\ *>\ primMPQ(\mbox{\hyperlink{class_edge}{Graph<int>}}\ *\mbox{\hyperlink{class_edge}{g}});}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_edge}{Graph<int>}}\ copyGraph(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Graph<int>}}\ \&\mbox{\hyperlink{class_edge}{originalGraph}});}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ tspPrimMethod(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_edge}{Graph<int>}}\ \&\mbox{\hyperlink{class_edge}{graphTemp}},\ \mbox{\hyperlink{class_edge}{Vertex<int>}}\ *\mbox{\hyperlink{class_edge}{startVertex}},\ std::vector<\mbox{\hyperlink{class_edge}{Edge<int>}}\ *>\ \&\mbox{\hyperlink{class_edge}{shortestPathEdges}});}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{void}\ triangularHeuristicAproximation(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_edge}{startNodeId}},\ std::vector<\mbox{\hyperlink{class_edge}{Vertex<int>}}*>\ \&\mbox{\hyperlink{class_edge}{aproximationTour}},\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{class_edge}{aproximationTourCost}});}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ calculateTourCost(std::vector<\mbox{\hyperlink{class_edge}{Vertex<int>}}\ *>\ \mbox{\hyperlink{class_edge}{tour}},\ \mbox{\hyperlink{class_edge}{Graph<int>}}\ \&\mbox{\hyperlink{class_edge}{g}});}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJ2\_TSPMANAGER\_H}}
+
+\end{DoxyCode}
